@@ -1,0 +1,1979 @@
+/******** ESTILOS LOGIN ********/
+
+.ic-Form-control--login {
+	display: block;
+}
+
+.ic-Login__actions {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.ic-Login__actions-timeout {
+	display:none;
+}
+
+.ic-Login__sso, .ctacanvas_main {
+	display: block;
+}
+
+
+/*******************************/
+
+
+.ic-Login {
+	position: absolute;
+	top: 50%;
+	right: 5%;
+	transform:translateY(-50%);
+}
+
+.ic-Login__forgot {
+	display: none;
+}
+
+.ic-Login-header__links {
+	display: none;
+}
+
+.ic-Form-control--login {
+	display:none;
+}
+
+.ic-Login__actions{
+	display: none;
+}
+
+.ic-Login-footer__links {
+	display:none;
+}
+
+.ic-Form-control--login .ic-Input{
+	border: solid 1px #000 !important;
+	border-radius: 0;
+}
+
+.ic-Form-control--login .ic-Label {
+	color: #000 !important;
+}
+
+.ic-Login__actions-timeout label {
+	color: #000 !important;
+}
+
+body.ic-Login-Body #footer.ic-Login-footer {
+	display: none !important;
+}
+.ctacanvas_main{
+	float: right;
+	font-size: .8em;
+	font-weight: bold;
+	color:#a09a9b;
+}
+
+.message_info{
+	float: right;
+	font-size: .8em;
+	font-weight: bold;
+	color:#a09a9b;
+	padding:20px 0 20px 0;
+}
+
+.ctacanvas_main:hover {
+	text-decoration: underline;
+	cursor:pointer;
+}
+
+.ic-Login__body {
+	padding: 0 12px 0 12px
+}
+
+.ic-Login__content {
+	padding: 12px 0 0 0;
+}
+
+#d_grid_login span.ui-icon-extlink {
+	display: none;
+}
+
+.ic-Login-header__logo {
+	flex: 0 0 300px !important;
+}
+
+/* .ic-Login__sso-button__title span {
+	display: none;
+}
+.ic-Login__sso-button__title:after {
+	content: 'correo UTP';
+} */
+
+.ic-Login__sso-list__item {
+	border: solid 1px #b01e31;
+	border-radius: 6px;
+	list-style: none;
+	text-align: center;
+}
+
+div#dashboard div.ic-notification div.notification_account_content div.ic-notification__content div.ic-notification__actions a.Button {
+	display:none !important;
+}
+
+ul.ic-NavMenu__link-list li:last-child a[data-reactid*="$allCourseLink"] {
+	visibility: hidden;
+	position: relative;
+	width:100%;
+}
+
+ul.ic-NavMenu__link-list li:last-child a[data-reactid*="$allCourseLink"]:after {
+	visibility: visible;
+	position: absolute;
+	left: 0;
+	top:0;
+	content:"Cursos destacados y pasados";
+}
+
+.divUpdateMessage {
+	background: #fafad2;
+    border: solid 1px #333;
+    padding: 15px;
+    margin-bottom: 45px;
+    text-align: center;
+    line-height: 2;
+    width: 65%;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+	font-size: 1.2em;
+}
+
+/******* ESTILOS VISTA MOBILE *******/
+#login_form .ic-Form-control {
+	display:none;
+}
+
+.forgotBlock {
+	display: none;
+}
+
+#f1_card {
+	position: relative;
+}
+
+.li-item-mobile .Button {
+	width: 270px;
+	padding: 8px 0 14px 0;
+}
+
+.li-item-mobile{
+	list-style: none;
+}
+
+#link_canvas_mobile {
+	text-align: right;
+	font-size: .8em;
+	cursor: pointer;
+	color: #b1b1b1;
+	/* display:none; */
+}
+
+html{
+	color: #000000;
+	background: #ffffff;
+}
+
+.mobileLogin-Header {
+	z-index: 1;
+	background-image:url('https://www.utp.edu.pe/sites/default/files/logo_utp_0.png') !important;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 210px 46px;
+	min-height: 156px;
+}
+
+.btnmobile {
+	color: #fff !important;
+	background: #b01e2d !important;
+}
+
+#body-content > div.page-controls > div.page-controls__action-row.ng-scope {
+    display:none !important;
+}
+
+@media (min-width: 680px) {
+	#f1_card .face {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+@media (max-width: 680px) {
+	html{
+		color: #000000;
+		background: #ffffff;
+	}
+
+	#login_form  button {
+		display:none;
+		color: #fff !important;
+		background: #b01e2d !important;
+	}
+
+	.mobileLogin-Header {
+		z-index: 1;
+		background-image:url('https://www.utp.edu.pe/sites/default/files/logo_utp_0.png') !important;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 210px 46px;
+		min-height: 156px;
+	}
+
+	.titulo-repaso {
+		position: absolute;
+		top: 10% !important;
+		left: 60% !important;
+		transform: translateX(-50%);
+		color: #fff;
+		line-height: 1;
+		width: 90%;
+		height: auto;
+		font-size: 4vw;
+	}
+}
+
+
+
+/**********************  MENU PAGINAS TUTOR VIRTUAL **********************/
+
+.tvunidad {
+	color: #66666f;
+	font-size:1.3em;
+	list-style: none;
+	margin: 20px 0;
+}
+
+.tvsemana {
+	list-style:none;
+	font-size: 1em;
+	color: #66666f;
+	margin: 13px 0;
+	cursor: pointer;
+	line-height:1;
+}
+
+.tvparrafo a {
+	list-style:none;
+	font-size: .8em;
+	color: #66666f;
+	margin: 13px 0;
+	cursor: pointer;
+	text-decoration:none !important;
+}
+
+.tvsemana a {
+	list-style:none;
+	font-size: .8em;
+	color: #66666f;
+	margin: 13px 0;
+	cursor: pointer;
+	text-decoration:underline dashed !important;
+}
+
+.tvsemana a:hover {
+	text-decoration:underline;
+	color:#21c7e3;
+}
+
+.tvunidad p {
+	font-size:.62em;
+	margin:0;
+	line-height:1;
+}
+
+.tvicon-visited {
+	color: white;
+	background:#21c7e3;
+	border-radius: 50% 50%;
+}
+
+.tvsemana-visited a {
+	text-decoration:underline;
+	color:#21c7e3;
+	cursor: text;
+}
+
+.tvcontenedor {
+	border: solid 1px #ccc;
+	border-radius: 0 3% 3% 0;
+	display:flex;
+	flex-direction:row;
+	width: 80%;
+	justify-content:center;
+	position: relative;
+}
+
+.tvparrafo {
+	margin: 12px 0 5px 0;
+	font-family: arial;
+}
+
+.tvhr {
+	margin: 0;
+    padding: 0 0 0 12px;
+}
+
+.tvnav-menu-width-display {
+	display:inline-block;
+	min-width:100%;
+
+}
+
+.tvnav-col {
+	margin: 0;
+	height: 50px;
+	background: #f8f8f8;
+	border:solid 1px #e7e7e7;
+	padding: 1% 0 1% 1%;
+	font-size: 1.3em;
+    margin-bottom: 10px;
+    font-family: arial;
+	min-width:100%;
+	transition:.3s;
+}
+
+.tvicon-burger {
+	width: 20px;
+    position: absolute;
+    right: 5%;
+    border: solid 1px #a59e9e;
+    padding: 5px;
+    text-align: center;
+}
+
+img {
+	max-width: 100% !important;
+}
+
+.tvnav-menu-width {
+	max-width:188px;
+}
+
+.encuesta-class {
+	position: absolute;
+    width: 100%;
+    text-align: center;
+	bottom: 0;
+}
+
+/*********** ESTILO MENU RESPONSIVE TUTOR VIRTUAL **************/
+
+@media (min-width:1024px) and (max-width:1285px) {
+	.tvcontenedor {
+		width:70%;
+	}
+
+	.col-xs-9 {
+		flex-basis:66%;
+		max-width:66%;
+	}
+}
+
+@media (max-width:1024px) {
+	.tvnav-menu-block {
+		display:block;
+		margin:0;
+		min-width:100%;
+	}
+
+	.tvnav-menu-width {
+		display:none;
+	}
+
+	.tvcontenedor {
+		width:100%;
+	}
+
+	.col-xs-9 {
+		flex-basis:100%;
+		max-width:100%;
+	}
+
+	.tvunidad {
+		font-size: 1.8em;
+	}
+	.tvsemana {
+		font-size: 1em;
+	}
+}
+
+@media (min-width:1024px) {
+	.tvnav-menu-block {
+		display:none;
+	}
+
+	.tvnav-menu-width {
+		display:inline-block;
+	}
+}
+
+/**********************  MENU GENERAL **********************/
+
+.grid-row {
+	/* justify-content:center; */
+}
+
+a.item_link{
+	font-weight:normal;
+	color:#666 !important;;
+}
+
+/***************** NUEVA VISTA TUTOR VIRTUAL ****************/
+
+.col12-nospace {
+	padding: 0 !important;
+	position:relative;
+}
+
+.col6-nospace {
+	padding: 0;
+	position:relative;
+	min-height:250px;
+}
+
+.button-section {
+	margin-bottom:0;
+	position: absolute;
+	bottom:0;
+}
+
+.button-section a {
+	text-decoration:none;
+}
+
+.btn-green {
+	background: #00af60;
+    color: #fff;
+    font-size: small;
+    font-weight: bold;
+    padding: 10px 40px 0 40px;
+	line-height:3;
+	border: solid 1px #00af60;
+}
+
+.btn-green:hover {
+	background: #3ed28f;
+	border: solid 1px #3ed28f;
+	color:#fff;
+}
+
+.col6-backcolor {
+	background: #fafbfd;
+}
+
+.title-section {
+	color: #233559;
+    font-weight: bold;
+	font-size: 1.6vw;
+}
+
+.title-section-h4 {
+	color: #233559;
+    font-weight: bold;
+	font-size: 1.2vw;
+}
+
+.section-p {
+	color: #8e8e8e;
+	font-size: 1vw;
+}
+
+.section-p-week {
+	font-size: .74vw;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: center;
+	position:relative;
+}
+
+.col-xs-3 a{
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: center;
+	text-decoration:none !important;
+	color:#2d3b45;
+}
+
+.col-xs-3 a:hover,
+.col-xs-3 a:hover ~ a{
+	color:#00af60;
+	cursor:pointer;
+}
+
+.col-xs-3 a:hover,
+.col-xs-3 a:hover + a{
+	color:#00af60;
+	cursor:pointer;
+}
+
+.section-p-date {
+	font-size: .75em;
+    margin-top: 0;
+    text-align: center;
+}
+
+.section-p-week:hover{
+	color:#00af60;
+	cursor:pointer;
+}
+
+.col6-nospace .col-xs-3 {
+	padding-bottom: 12px;
+	padding-right: 20px;
+    padding-left: 20px;
+}
+
+.section-p-week span > span {
+    border-bottom: solid 2px #00af60;
+    padding-bottom: 5px;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    content: ' ';
+}
+
+.col6-nospace .col-xs-2 {
+	padding-bottom: 12px;
+}
+
+.week-container {
+	padding: 7% 0 0 0;
+}
+
+.desc-container {
+	padding: 7%;
+}
+
+.titulo-repaso {
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translateX(-50%);
+	color: #fff;
+	line-height: 1;
+	width:90%;
+	height:auto;
+}
+
+.li-material-repaso-1 a {
+	color: #3a6eb0;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.li-material-repaso-2 a {
+	color: #0092d3;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.li-material-repaso-3 a {
+	color: #3f9e85;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.li-material-repaso-4 a {
+	color: #8fb435;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#revisalo-link a {
+	color:#fff;
+	text-decoration:none !important;
+}
+
+@media (max-width:1365px) {
+	.section-p-week span > span {
+		border-bottom: none;
+	}
+
+	.section-p-week {
+		border-bottom: solid 2px #00af60;
+	}
+}
+
+@media (max-width: 680px) {
+	.section-p-week {
+		font-size: .78em;
+	}
+
+	.title-section-h4 {
+		font-size: small;
+	}
+	.title-section {
+		font-size: 1.8em;
+	}
+
+	.title-section-h4 {
+		font-size: 18px;
+	}
+	.section-p {
+		font-size: 100%;
+	}
+
+	.week-container {
+		padding: 0;
+	}
+
+	#section_silabo {
+		margin-bottom: 10%;
+	}
+
+	.desc-container {
+		padding: 0;
+	}
+
+	.col6-nospace {
+		min-height: 0;
+	}
+}
+
+/*********************** Vista Complemento Virtual ****************/
+
+.border-video {
+	border: solid 20px #623E8A;
+	padding: 0;
+	border-radius: 10px;
+}
+
+.section-style {
+	color:#fff;
+	background: #623E8A;
+	padding: 5px 10px;
+	border-radius: 10px;
+	font-size: 23px;
+	font-family: sans-serif;
+}
+
+.main-cvc-2 {
+	background-image: url(https://dl.dropbox.com/s/to0tab5yzi6pm4b/cuadro-fondo.png);
+}
+
+.item-header-list {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.item-list {
+	font-weight: bold;
+}
+
+.link_cvc a {
+	color:#2d3b45;
+	font-weight: bold;
+	text-decoration:none !important;
+}
+
+/*********************** Clases ChatBot ***************************/
+
+#maindivbots {
+	display: none;
+	outline: none!important;
+    visibility: visible!important;
+    resize: none!important;
+    box-shadow: none!important;
+    overflow: visible!important;
+    background: none!important;
+    opacity: 1!important;
+    filter: alpha(opacity=100)!important;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity1)!important;
+    -moz-opacity: 1!important;
+    -khtml-opacity: 1!important;
+    top: auto!important;
+    right: 10px!important;
+    bottom: 0px!important;
+    left: auto!important;
+    position: fixed!important;
+    /* border: 0!important; */
+	border: solid 1px #d2d6de;
+    min-height: 0!important;
+    min-width: 0!important;
+    max-height: none!important;
+    max-width: none!important;
+    padding: 0!important;
+    margin: 0!important;
+    -moz-transition-property: none!important;
+    -webkit-transition-property: none!important;
+    -o-transition-property: none!important;
+    transition-property: none!important;
+    transform: none!important;
+    -webkit-transform: none!important;
+    -ms-transform: none!important;
+    width: auto!important;
+    height: auto!important;
+    z-index: 2000000000!important;
+    background-color: transparent!important;
+    cursor: auto!important;
+    float: none!important;
+    border-radius: unset!important;
+}
+
+#frame {
+	/* height: 442px; */
+	height:400px;
+    outline: none !important;
+    visibility: visible !important;
+    resize: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    background: none transparent !important;
+    opacity: 1 !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    position: static !important;
+    border: 0px !important;
+    min-height: auto !important;
+    min-width: auto !important;
+    max-height: none !important;
+    max-width: none !important;
+    padding: 0px !important;
+    margin: 0px !important;
+    transition-property: none !important;
+    transform: none !important;
+    width: 350px !important;
+    z-index: 999999 !important;
+    cursor: auto !important;
+    float: none !important;
+    border-radius: unset !important;
+    display: block !important;
+}
+
+.closebot:hover {
+	cursor: pointer;
+    text-decoration: underline;
+}
+
+.titlebarchatbot {
+	display: flex;
+	justify-content: space-between;
+	padding: 5px 20px;
+	border: solid 1px #1485CC;
+	background: #1485CC;
+	color: white;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+#badgechatbot {
+	cursor:pointer;
+	white-space:pre;
+	position: fixed;
+	z-index: 3000000000 !important;
+	bottom: 5px;
+	right: 35px;
+	-webkit-transform: translateZ(0);
+	height: 120px;
+	width: 100px;
+	/* height: 54px;  */
+	/* width: 54px;  */
+	/* border-radius: 50%;  */
+	/* box-shadow: 3px 7px 44px 1px rgba(0,0,0,0.75); */
+	background-image: url(https://dl.dropboxusercontent.com/s/untkujndf9kqm09/botbadge.png);
+	background-repeat: no-repeat;
+}
+
+/*******************  SISTEMA DE PUNTUACION ******************/
+
+#popover_content {
+	width: 304px;
+}
+
+.valoracion {
+	position: relative;
+}
+
+.button__enviar {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.other-option {
+	display: flex;
+}
+
+.container__message {
+	display: flex;
+	width: 304px;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.container__options {
+	display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#container__message label.ic-Label {
+	font-size: 1em;
+}
+
+#container__message label.ic-Label:hover {
+	color : inherit;
+}
+
+.button__message {
+	width: 27%;
+}
+
+.textarea__message {
+	margin: 0px 0px 10px;
+	height: 91px;
+	width: 285px;
+}
+.initial_class_popover {
+	display: none;
+}
+.popover__message {
+	font-size: 1.2em;
+    font-weight: bold;
+}
+
+.close__button {
+	margin: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.popover__content {
+	display: none;
+	position: absolute;
+	transform: translate(0, 10px);
+	background-color: #fff;
+	padding: .7rem 1.5rem 1.5rem 1.5rem;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	width: auto;
+	border: solid 1px;
+  }
+
+.popover__content:after,
+.popover__content:before {
+	position: absolute;
+	z-index: -1;
+	content: "";
+	right: calc(53%);
+	bottom: -20px;
+	border-style: solid;
+	transition-duration: 0.3s;
+	transition-property: transform;
+}
+
+
+.popover__content:after {
+    border-color: #fff transparent transparent transparent;
+    border-width: 11px;
+    bottom: -22px;
+}
+
+.popover__content:before {
+    border-color: #000 transparent transparent transparent;
+    border-width: 11px;
+    bottom: -23px;
+}
+
+.greetings__container {
+	display: flex;
+}
+
+.face__container {
+	font-size: 4em;
+    margin: .2em;
+}
+
+.greetings_comment {
+	font-size: 1.6em;
+    font-weight: bold;
+}
+
+/**********************/
+
+.popover__content__down {
+	position: absolute;
+	transform: translate(0, 10px);
+	background-color: #fff;
+	padding: 1.5rem;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+	width: auto;
+	border: solid 1px;
+  }
+
+.popover__content__down:after,
+.popover__content__down:before {
+	position: absolute;
+	z-index: -1;
+	content: "";
+	right: calc(50%);
+	top: -20px;
+	border-style: solid;
+	transition-duration: 0.3s;
+	transition-property: transform;
+}
+
+
+.popover__content__down:after {
+	border-color: transparent transparent #fff transparent;
+    border-width: 11px;
+    top: -21px;
+}
+
+.popover__content__down:before {
+    border-color: transparent transparent #000 transparent;
+    border-width: 11px;
+    top: -22px;
+}
+
+#rating-item {
+	position: relative;
+    display: inline-block;
+	float:right;
+	padding: 0 24px;
+	right:0;
+}
+
+#rating-item input[type="radio"] {
+  display: none;
+}
+
+#rating-item label {
+  color: grey;
+}
+
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+#rating-item label:hover,
+#rating-item label:hover ~ label {
+  color: orange;
+}
+
+#rating-item input[type="radio"]:checked ~ label {
+  color: orange;
+}
+
+.clasificacion input[type=checkbox]+label, .clasificacion input[type=radio]+label {
+	vertical-align: 0;
+}
+
+.clasificacion label {
+	font-size: 1.5em;
+}
+
+/* valoraciones para probar cursos 100 virtual 2020 - 1*/
+
+#valorar-recurso {
+	display: inline-block;
+}
+
+#valorar-recurso #rating-item{
+	display: inline-block;
+	float: none;
+	padding: 0;
+}
+
+#valorar-pagina {
+	display: inline-block;
+}
+
+#valorar-pagina #rating-item{
+	display: inline-block;
+	float: none;
+	padding: 0;
+}
+
+/********************* induccion ************************/
+
+.tab-main-ind {
+	border: double 6px #c5c9c9;
+	margin: 0 0 10px 0;
+	border-bottom: double 6px #c5c9c9 !important;
+	background: #0093d6;
+}
+
+/*Inicio activar tab*/
+.active_tab .ui-state-default{
+	/* filter: drop-shadow(2px 3px 5px gray); */
+	filter: opacity(0.5);
+}
+
+.active_tab .ui-state-active{
+	/* filter: drop-shadow(2px 3px 5px gray); */
+	filter: opacity(1);
+}
+/*Fin activar tab*/
+
+/* Estilos Caledu */
+
+.buenas-practicas-del-evaluador {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+.buenas-practicas-del-evaluador iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/*Inicio - Estilos induccion UTP*/
+.induccion_tabs .ui-state-active{
+background: #0093d6 !important;
+}
+/*Fin - Estilos induccion UTP*/
+
+/*Inicio - Curso por paginas CGT (rediseno) */
+
+.cgt-video-margin-auto .video_comment span {
+	margin: auto;
+}
+
+.not-line-link a {
+	text-decoration: none !important;
+
+}
+
+.global-cgt .grid-row{
+	margin-bottom: 25px;
+}
+
+.global-cgt .cgt-video-presentacion{
+	padding: 0 15px 0 0;
+	margin: auto;
+	text-align: center;
+}
+
+.global-cgt .cgt-video-presentacion .media_comment_thumbnail-normal {
+	background: white !important;
+	background-image: url(https://dl.dropbox.com/s/vyd609j5m9jkej0/VideoPresentacionCGTUTP.jpg) !important;
+	width: 100%;
+    height: 270px;
+    border: solid 1.5px #848484c7;
+}
+
+.global-cgt .cgt-video-presentacion .innerholder .mejs-video {
+	width: 100% !important;
+    height: 260px !important;
+    border: solid 1.5px #848484c7;
+}
+
+
+.cgt-doc-general{
+	padding: 0;
+	margin: auto;
+}
+
+.cgt-doc-general .content-box{
+	margin: auto;
+}
+
+.cgt-border-doc-general {
+	border: dashed 2px #c1c3c2;
+	height: 86px;
+	background: #f5f5f5c7;
+	margin-bottom: 5px;
+}
+
+.cgt-border-doc-general-sub {
+	margin: auto 0;
+	text-align: left;
+}
+
+.cgt-columna-icon-doc-general {
+	 padding-right: 5px;
+}
+
+.cgt-padding-0 {
+	padding: 0;
+}
+
+.cgt-caja-semana {
+	padding: 0 25px 25px 0;
+}
+
+.cgt-caja-semana-sub {
+	border: solid 1px #c1c3c2;
+	width: 100%;
+	height: 100%;
+}
+
+.cgt-caja-semana-titulo {
+	padding: 35px 0 35px 0;
+}
+
+.cgt-caja-semana-titulo-sub span {
+	font-size: 18pt; color: #1485cc;
+}
+
+.cgt-caja-semana-cabecera {
+	width: 100%;
+	height: 60px;
+	background: #1485cc;
+	text-align: center;
+	color: white;
+	display: flex;
+}
+
+.cgt-caja-semana-cabecera span{
+	margin: auto;
+	font-size: 14pt;
+}
+
+.cgt-caja-semana-tabla {
+	border-spacing: 15px;
+	font-size: 11pt;
+	width: 100%;
+}
+
+.cgt-caja-semana-fila-desactivado {
+	color: #ccc !important;
+	cursor: default;
+}
+
+.cgt-caja-semana-fila-desactivado a {
+	color: #ccc !important;
+	pointer-events: none;
+}
+
+.cgt-caja-semana-cabecera-final {
+	width: 100%;
+	height: 60px;
+	background: red;
+	text-align: center;
+	color: white;
+	display: flex;
+}
+
+.cgt-caja-semana-cabecera-final span{
+	margin: auto;
+	font-size: 14pt;
+}
+
+.cgt-seccion-semana {
+	margin-bottom: 30px;
+}
+
+.cgt-seccion-semana-titulo {
+	margin-bottom: 10px;
+}
+
+.cgt-seccion-semana-titulo span{
+	font-size: 18pt;
+	color: #1485cc;
+}
+
+.cgt-seccion-semana-titulo-descripcion{
+	margin-bottom: 25px;
+}
+
+.cgt-seccion-semana-tabla {
+	margin-bottom: 20px;
+	border-spacing: 15px;
+}
+
+.cgt-videos-semana {
+	width: 90%;
+	margin: 60px auto;
+	font-size: 10pt;
+	text-align: center;
+}
+
+.cgt-caja-video {
+	padding: 10px;
+}
+
+.cgt-caja-video-sub1 {
+	border: solid 1px #8484845c;
+}
+
+.cgt-caja-video-sub1-video {
+	margin: 10px;
+}
+
+.cgt-lista-semanas-web ul {
+	list-style: none; margin: auto;
+}
+
+.cgt-lista-semanas-web li {
+	padding: 8px;
+}
+
+.cgt-lista-semanas-movil {
+	text-align: center;
+    display: block;
+}
+
+/*Fin - Curso por paginas CGT (rediseno) */
+
+/* Diseño Accordion Canvas */
+.accordion-header-canvas {
+    background: none !important;
+    color: #000;
+    border: none !important;
+	margin: 10px 0 !important;
+}
+
+.accordion-header-canvas a.header-link {
+	color: #b01e31 !important;
+    font-size: 1rem !important;
+	display:inline !important;
+}
+
+.accordion-panel-canvas {
+	margin-bottom: 1em !important;
+    border: none !important;
+	padding: 0 15px !important;
+}
+
+.accordion-panel-canvas div {
+	font-size: 1rem;
+}
+
+.accordion-panel-canvas {
+	display: none;
+}
+
+.ui-accordion-header-icon {
+	display: inline-block !important;
+}
+/* fin Diseño Accordion Canvas */
+
+/* Collapse cursos */
+
+/*  Collapse all modules. 
+     use this in combination with JS to auto-open the module link that was 
+     clicked to navigate to the page */
+
+/* #content #context_modules .content, */
+/* #content #context_modules .collapse_module_link { */
+  /* display: none; */
+/* } */
+
+/* #content #context_modules .expand_module_link { */
+  /* display: inline-block; */
+/* } */
+
+
+
+/* Inicio - Cursos 100% virtual CGT 2019-3 gestion */
+
+.titulo-cgt-vir {
+    margin-bottom: 20px;
+}
+
+.titulo-p1-cgt-vir {
+    font-size: 40pt; 
+    display: inline; 
+    font-weight: bold;
+}
+
+.titulo-linea-cgt-vir {
+    margin: 0px 30px 0px 20px; 
+    border-right: solid; 
+    font-size: 30pt; 
+    display: inline; 
+    font-weight: bold; 
+    vertical-align: super;
+}
+
+.titulo-p2-cgt-vir {
+    font-size: 20pt; 
+    display: inline; 
+    vertical-align: text-bottom;
+}
+
+.caja-titulo-cgt-vir {
+    margin-bottom: 20px; 
+    width: 100%;
+}
+
+.caja-titulo-cgt-vir .caja {
+    display: inline-flex; 
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.caja-titulo-cgt-vir .caja .icon {
+    margin: auto 0px;
+}
+
+.caja-titulo-cgt-vir .caja .icon img {
+	margin: auto; 
+	width: 25px;
+}
+
+.caja-titulo-cgt-vir .caja .titulo {
+    padding-left: 8px;
+    width: 65%;
+}
+
+.caja-titulo-cgt-vir .caja .titulo p {
+    font-size: 15pt; 
+    font-weight: lighter;
+	text-align: left;
+	margin: 0px;
+}
+
+.caja-titulo-cgt-vir .caja .descargar {
+    margin: auto 0px;
+}
+
+/* .caja-titulo-cgt-vir .caja .descargar img {
+    width: 110px;
+} */
+
+/* .caja-recursos-cgt-vir {
+    margin-bottom: 50px; 
+    width: 100%;
+} */
+
+.linea-div .linea-div-cgt-vir {
+    height: 330px; 
+    width: 0%; 
+    border: 1px solid #f29ba0;
+}
+
+/* now */
+
+.caja-cgt-100v {
+	background:#e8e8e8b8; 
+	padding: 28px 40px;
+}
+
+.caja-cgt-100v audio {
+	border: 1px solid #b1b1b1a1; 
+	vertical-align: middle; 
+	border-radius: 50px;
+}
+
+.fondo {
+	background: white; 
+	box-shadow: 1px 1px 6px #a5a598;
+}
+
+.caja-principal-cgt-100v {
+	margin-bottom: 40px;
+}
+
+.caja-principal-cgt-100v .col-xs-6{
+	margin: auto;
+}
+
+
+.caja-cgt-100v .descripcion {
+	margin: auto 45px;
+}
+
+.caja-cgt-100v audio{
+	width: 100%;
+}
+
+.caja-cgt-100v .descripcion p {
+	margin-left: 15px; 
+	text-align: justify;
+}
+
+.caja-secundaria-cgt-100v .descripcion {
+	margin: 20px 45px;
+}
+
+.caja-secundaria-cgt-100v .audio-pdf {
+	text-align: right; 
+	margin: auto 45px auto 10px;
+}
+
+.caja-secundaria-cgt-100v .col-xs-8 {
+	margin: auto;
+}
+
+.caja-secundaria-cgt-100v .col-xs-4 {
+	margin: auto;
+}
+
+.caja-secundaria-cgt-100v .audio-pdf .audio {
+	text-align: left;
+}
+
+.caja-secundaria-cgt-100v .audio-pdf .pdf {
+	text-align: left;
+	margin-left: 5px;
+}
+
+.foro-consulta-cgt-100v {
+	display: block; text-align: right;
+}
+
+.caja-principal-cgt-100v .audio-principal {
+	margin: 30px; 
+	text-align: center;
+}
+
+.caja-principal-cgt-100v .audio-principal audio {
+	margin-top: 10px;
+}
+
+.caja-principal-cgt-100v .pdf-principal .instructure_file_holder {
+	display: none;
+}
+
+.caja-principal-cgt-100v .pdf-principal .hide_file_preview_link {
+	display: none;
+}
+
+.caja-principal-cgt-100v .pdf-principal div {
+	height: 400px;
+}
+
+.pag-inicio-cgt-100v {
+	width: 80%;
+	text-align: center;
+	margin: auto;
+}
+
+.pag-inicio-cgt-100v .descripcion {
+	font-size: 14pt;
+	color: #333333;
+}
+
+
+
+/* Fin - Cursos 100% virtual CGT 2019-3 gestion*/
+
+/* Inicio - Cursos 100% virtual CGT 2019-3 instrumento */
+.pagina-inicio-virtual-v1 {
+	margin: 0px;
+}
+
+.pagina-inicio-virtual-v1 .color-1 {
+	color: #1A2849;
+}
+
+.pagina-inicio-virtual-v1 .color-2 {
+	color: #59AC92;
+}
+
+.pagina-inicio-virtual-v1 .fondo-1 {
+	background: #e8e8e8b8;
+	border-radius: 5px;
+}
+
+.pagina-contenido-virtual-v1 .fondo-1 {
+	background: #e8e8e8b8;
+	border-radius: 5px;
+}
+
+.pagina-contenido-virtual-v1 .fondo-2 {
+	background: #F1E6FF;
+	border-radius: 5px;
+}
+
+.pagina-inicio-virtual-v1 .caja {
+	padding: 0;
+	text-align: justify; 
+	font-size: 11pt;
+}
+
+.pagina-inicio-virtual-v1 .caja-1 h1 {
+	text-align: right; 
+	font-weight: bold; 
+	font-size: 26pt; 
+	line-height: 103%;
+}
+
+.pagina-inicio-virtual-v1 .caja-1 p {
+	margin: 30px 0;
+}
+
+.pagina-inicio-virtual-v1 .caja-2{
+	text-align: right;
+}
+
+.pagina-inicio-virtual-v1 .caja-2 iframe {
+	padding: 8px 12px;
+	height: 290px;
+    width: 90%;
+}
+
+.pagina-inicio-virtual-v1 .caja-3{
+	padding-top: 15px;
+}
+
+.pagina-inicio-virtual-v1 .caja-3 .tit-perfil-docente {
+	margin: 25px;
+}
+
+
+.pagina-inicio-virtual-v1 .caja-3 .tit-perfil-docente P{
+	font-weight: bold; 
+	font-size: 17pt;
+	font-family: 'Noto Serif', serif;
+	text-align: center;
+	margin: 0px;
+}
+
+.pagina-inicio-virtual-v1 .caja-3 .tit-perfil-docente p > span {
+	font-size: 40pt; 
+	vertical-align: middle;
+}
+
+.pagina-inicio-virtual-v1 .caja-3 .desc-perfil-docente {
+	padding: 8px 20px;
+	border-radius: 20px;
+}
+
+.pagina-inicio-virtual-v1 .caja-3 .desc-perfil-docente table{
+	margin: 0px;
+}
+
+.pagina-inicio-virtual-v1 .caja-3 .desc-perfil-docente .foto {
+	width: 30%;
+	text-align: center; 
+	padding: 10px;
+}
+
+.pagina-inicio-virtual-v1 .caja-3 .desc-perfil-docente .texto {
+	width: 70%;
+}
+
+.pagina-inicio-virtual-v1 .boton-empezar {
+	text-align: center;
+	margin: 50px; 
+}
+
+.pagina-inicio-virtual-v1 .boton-empezar a {
+	font-weight: bold;
+	background: #59AC92;
+	color: white; 
+	border:none;
+	padding: 10px 30px;
+	font-size: 13pt;
+	border-radius: 10px;
+	box-shadow: inset 0 0 0 1px #f5f5f5;
+}
+
+.pagina-contenido-virtual-v1 {
+	margin: auto;
+}
+
+.pagina-contenido-virtual-v1 .caja {
+	margin-bottom: 18px; 
+	font-size: 13pt; 
+	padding: 0px;
+	text-align: justify;
+}
+
+.pagina-contenido-virtual-v1 .caja-1 {
+	padding: 20px 40px;
+}
+
+.pagina-contenido-virtual-v1 .caja-1 p {
+	text-align: justify!important;
+}
+
+.pagina-contenido-virtual-v1 .valoracion {
+	padding: 10px 15px 0 15px;
+	font-size: 11pt;
+}
+
+.pagina-contenido-virtual-v1 .caja-2 .video-contenido {
+	padding: 0 50px;
+}
+
+.pagina-contenido-virtual-v1 .caja-2 .video-contenido iframe{
+	border: 1px solid #80808082;
+	width: 100%;
+	height: 280px;
+}
+
+.pagina-contenido-virtual-v1 .caja-2 .video-contenido .fondo-1{
+	padding: 20px; 
+	font-size: 10pt;
+}
+
+/* .pagina-contenido-virtual-v1 .caja-2 .video-contenido .valoracion {
+	font-size: 12pt !important;
+} */
+
+.pagina-contenido-virtual-v1 .caja-2 .video-contenido table{
+	width: 100%;
+}
+
+.pagina-contenido-virtual-v1 .caja-2 .video-contenido .descargar{
+	text-align: right;
+}
+
+.pagina-contenido-virtual-v1 .caja-2 .desc-contenido {
+	padding: 0 50px 0 0;
+}
+
+.pagina-contenido-virtual-v1 .caja-2 .desc-contenido p {
+	margin: 0;
+}
+
+.pagina-contenido-virtual-v1 .caja-2 .desc-contenido div {
+	padding: 15px 30px 5px 30px;
+	height: 100%;
+}
+
+.pagina-contenido-virtual-v1 .caja-2 .desc-contenido ul {
+	margin: 0; 
+	list-style: none;
+	padding: 20px 0;
+}
+
+.pagina-contenido-virtual-v1 .caja-2 .desc-contenido li {
+	padding: 7px 0;
+}
+
+.pagina-contenido-virtual-v1 .caja-2 .desc-contenido li a {
+	padding-right: 15px;
+}
+
+
+.pagina-contenido-virtual-v1 .caja-3 div{
+	width: 98%; 
+	margin: auto;
+	padding: 15px;
+}
+
+.pagina-contenido-virtual-v1 .caja-3 {
+	padding: 30px 40px;
+}
+
+
+.pagina-contenido-virtual-v1 .caja-3 p{
+	text-align: center;
+}
+
+/* Fin - Cursos 100% virtual CGT 2019-3 instrumento */
+
+/* inicio Cambio color boton red*/
+.cambioColor:hover {
+	color:white;
+	background: #b01e31;
+}
+/* fin Cambio color boton red*/
+
+/* inicio cambio de tamaños de iconos canvas*/
+.icon-size-14pt a::before {
+	font-size: 14pt;
+	margin: auto;
+}
+
+.icon-size-40pt a::before {
+	font-size: 40pt;
+	margin: auto;
+}
+
+.icon-size-1-3rem i::before {
+	font-size: 1.3rem;
+	margin: auto;
+}
+
+.icon-size-2rem i::before {
+	font-size: 2rem;
+	margin: auto;
+}
+
+.border-radius-10px {
+	border-radius: 10px;
+}
+
+.triangulo-ayuda-canvas {
+	margin: 0px auto;
+    width: 0;
+    height: 0;
+    border-right: 25px solid transparent;
+    border-top: 10px solid #35477d;
+    border-left: 25px solid transparent;
+    border-bottom: 0px solid transparent;
+}
+
+/* Fin cambio de tamaños de iconos canvas*/
+
+
+/* Inicio aplicar border */
+
+.border-radius-7px {
+	border-radius: 7px;
+}
+
+/* Fin aplicar border */
+
+
+/* Inicio comunidad docente*/
+
+.comunidad-2020 .texto p {
+	padding: 8pt;; 
+	font-size: 13pt; 
+	line-height: 20pt
+}
+
+.comunidad-2020 li{
+	font-size: 13pt; 
+	border-bottom: 1px solid #ddd; 
+	margin: 0 0pt 18pt 40pt; 
+	width: 62%; 
+	padding: 0 0 10pt 0;
+}
+
+.comunidad-2020 ul {
+	padding: 15pt 0;
+	list-style: none;
+}
+
+.comunidad-2020 li i {
+	display: block;
+    padding: 3pt 10pt 10pt 0pt;
+    float: left;
+}
+/* Fin comunidad docente*/
+
+
+
+/*Inicio mouse hover link canvas*/
+.mousehover-canvasutp a:hover {
+	color: #b01e31 !important;
+	text-decoration: underline #b01e31 !important;
+}
+
+/*Fin mouse hover link canvas*/
+
+
+/* Inicio SlideShow */
+
+.slideshow-utp-container {
+    max-width: 1000px;
+    position: relative;
+	margin: 3px auto;
+}
+
+.border-gray {
+	border: solid 1.5px #80808045;
+}
+
+
+	/* Caption text */
+/* .text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+} */
+
+	/* Number text (1/3 etc) */
+.slideshow-utp-container .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+	/* The dots/bullets/indicators */
+.slideshow-utp-container .dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.slideshow-utp-container .active {
+    background-color: #717171;
+}
+
+	/* Fading animation */
+.slideshow-utp-container .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+	/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+    .text {font-size: 11px}
+}
+    
+/* Fin SliderShow */
+
+/* Inicio curso 100 virtual 2020 Marzo */
+
+	/* pagina de inicio */
+
+.titulo-video-100vir-2202 {
+	padding-bottom: 35px;
+}
+
+.titulo-video-100vir-2202 .titulo h1 {
+	font-weight: 600; 
+	font-size: 30pt; 
+	font-family: sans-serif;
+	line-height: initial;
+}
+
+.titulo-video-100vir-2202 .titulo p {
+	width: 80%; 
+	text-align: justify;
+}
+
+.titulo-video-100vir-2202 .video {
+	text-align: right; 
+	margin: auto;
+}
+
+.silabo-preguntas-100vir-2202 {
+	padding-bottom: 35px;
+}
+
+.silabo-preguntas-100vir-2202 .silabo {
+	margin: auto;
+}
+
+.silabo-preguntas-100vir-2202 .preguntas {
+	padding-left: 15%;
+}
+
+.semanas-100vir-2202 .titulo-semana {
+	margin: 1px 0;
+	font-weight: bold;
+	font-size:	15pt;
+}
+
+.semanas-100vir-2202 .linea-semana {
+	border-bottom: solid 4px; 
+	width: 18px; 
+	margin: 0;
+	font: 0/0 a;
+}
+
+.semanas-100vir-2202 .grid-row {
+	padding: 15px 0px 50px 0px;
+}
+
+	/* Pagina de contenido */
+
+.pagina-contenido-100vir-2202 .desc-video {
+	padding: 0 30px 0 0;
+}
+
+.pagina-contenido-100vir-2202 .descripcion {
+	text-align: justify;
+	padding-bottom: 15px;
+}
+
+.pagina-contenido-100vir-2202 .desc-traducida {
+	font-style: italic;
+	color: #808080cf;
+}
+
+.pagina-contenido-100vir-2202 .desc-video .video {
+	height:315px;
+}
+
+.pagina-contenido-100vir-2202 .desc-video .iframe {
+	height:315px;
+	padding: 5px;
+	border: 1px solid #80808069;
+}
+
+
+.pagina-contenido-100vir-2202 .desc-video .descargar {
+	padding: 18px 10px;
+	font-size: 9.5pt;
+	background: #e8e8e8b8;
+}
+
+.pagina-contenido-100vir-2202 .desc-video .descargar table {
+	width: 100%;
+	margin: 0;
+}
+
+.pagina-contenido-100vir-2202 .desc-video .descargar .desc-descarga {
+	padding: 0; 
+	width: 40%;
+}
+
+.pagina-contenido-100vir-2202 .desc-video .descargar .enlace-descarga {
+	text-align: right;
+}
+
+.pagina-contenido-100vir-2202 .desc-video .valoracion {
+	padding: 0 10px;
+	font-size: 10pt;
+}
+
+.pagina-contenido-100vir-2202 .desc-enlaces {
+	padding: 0 0 0 30px;
+}
+
+.pagina-contenido-100vir-2202 .desc-enlaces .enlaces {
+	height:317px;
+}
+
+.pagina-contenido-100vir-2202 .desc-enlaces .enlaces li {
+	margin-bottom: 10px;
+	color: var(--ic-link-color);
+}
+
+.pagina-contenido-100vir-2202 .desc-enlaces .foro-consultas {
+	font-size: 11pt; 
+	text-align: center; 
+	background: #e8e8e8b8; 
+	padding: 8px 0;
+}
+
+.pagina-contenido-100vir-2202 .desc-enlaces .foro-consultas p {
+	margin: 0;
+}
+
+/* Fin curso 100 virtual 2020 Marzo */
+
+/* Inicio Olvide contraseña */
+
+.ctacanvas_main_psw{
+    float: left;
+    font-size: .8em;
+    font-weight: bold;
+    color:#a09a9b;
+}
+ 
+.ctacanvas_main_psw a.external .ui-icon-extlink{
+    display:none !important;
+}
+.ctacanvas_main_psw:hover {
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+/* Fin Olvide contraseña */

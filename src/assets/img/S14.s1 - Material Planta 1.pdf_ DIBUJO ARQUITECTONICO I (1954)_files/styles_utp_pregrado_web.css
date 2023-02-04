@@ -1,0 +1,452 @@
+/*.ic-Layout-columns {
+	position: relative;
+}*/
+
+.ic-Login {
+	position: absolute;
+	top: 50%;
+	right: 5%;
+	transform:translateY(-50%);
+}
+
+.ic-Login__forgot {
+	display: none;
+}
+
+.ic-Login-header__links {
+	display: none;
+}
+
+.ic-Form-control--login {
+	display:none;
+}
+
+.ic-Login__actions{
+	display: none;
+}
+
+.ic-Login-footer__links {
+	display:none;
+}
+
+.ic-Form-control--login .ic-Input{
+	border: solid 1px #000 !important;
+	border-radius: 0;
+}
+
+.ic-Form-control--login .ic-Label {
+	color: #000 !important;
+}
+
+.ic-Login__actions-timeout label {
+	color: #000 !important;
+}
+
+body.ic-Login-Body #footer.ic-Login-footer {
+	display: none !important;
+}
+.ctacanvas_main{
+	float: right;
+	font-size: .8em;
+	font-weight: bold;
+	color:#a09a9b;
+}
+
+.message_info{
+	float: right;
+	font-size: .8em;
+	font-weight: bold;
+	color:#a09a9b;
+	padding:20px 0 20px 0;
+}
+
+.ctacanvas_main:hover {
+	text-decoration: underline;
+	cursor:pointer;
+}
+
+.ic-Login__body {
+	padding: 0 18px 12px 18px
+}
+
+.ic-Login-header__logo {
+	flex: 0 0 300px !important;
+}
+
+.ic-Login__sso-button__title span {
+	display: none;
+}
+.ic-Login__sso-button__title:after {
+	content: 'correo UTP';
+}
+
+.ic-Login__sso-list__item {
+	border: solid 1px #b01e31;
+	border-radius: 6px;
+	list-style: none;
+	text-align: center;
+}
+
+/******* mobile *******/
+/*#f1_container {
+	background-image:url('http://dta.utp.edu.pe/wp-content/uploads/2017/03/logo-utp.png') !important;
+}*/
+#login_form .ic-Form-control {
+	display:none;
+}
+
+.forgotBlock {
+	display: none;
+}
+
+#f1_card {
+	position: relative;
+}
+
+.li-item-mobile .Button {
+	width: 270px;
+	padding: 8px 0 14px 0;
+}
+
+.li-item-mobile{
+	list-style: none;
+}
+
+#link_canvas_mobile {
+	text-align: right;
+	font-size: .8em;
+	cursor: pointer;
+	color: #b1b1b1;
+}
+html{
+	color: #000000;
+	background: #ffffff;
+}
+/*#f1_container {
+	background-image:url('https://www.utp.edu.pe/sites/default/files/logologo.png') !important;
+}*/
+
+.mobileLogin-Header {
+	z-index: 1;
+	background-image:url('https://www.utp.edu.pe/sites/default/files/logologo.png') !important;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 177px 60px;
+	min-height: 156px;
+}
+
+.btnmobile {
+	color: #fff !important;
+	background: #b01e2d !important;
+}
+
+#body-content > div.page-controls > div.page-controls__action-row.ng-scope {
+    display:none !important;
+}
+
+@media (min-width: 680px) {
+	#f1_card .face {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+@media (max-width: 680px) {
+	html{
+		color: #000000;
+		background: #ffffff;
+	}
+	
+	#login_form  button {
+		display:none;
+		color: #fff !important;
+		background: #b01e2d !important;
+	}
+	
+	.mobileLogin-Header {
+		z-index: 1;
+		background-image:url('https://www.utp.edu.pe/sites/default/files/logologo.png') !important;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 177px 60px;
+		min-height: 156px;
+	}
+	/*#f1_container {
+		background-image:url('https://www.utp.edu.pe/sites/default/files/logologo.png') !important;
+	}*/
+}
+
+
+
+/**********************  MENU PAGINAS TUTOR VIRTUAL **********************/
+
+.tvunidad {
+	color: #66666f;
+	font-size:1.3em;
+	list-style: none;
+	margin: 20px 0;
+}
+
+.tvsemana {
+	list-style:none;
+	font-size: 1em;
+	color: #66666f;
+	margin: 13px 0;
+	cursor: pointer;
+	line-height:1;
+}
+
+.tvparrafo a {
+	list-style:none;
+	font-size: .8em;
+	color: #66666f;
+	margin: 13px 0;
+	cursor: pointer;
+	text-decoration:none !important;
+}
+
+.tvsemana a {
+	list-style:none;
+	font-size: .8em;
+	color: #66666f;
+	margin: 13px 0;
+	cursor: pointer;
+	text-decoration:underline dashed !important;
+}
+
+.tvsemana a:hover {
+	text-decoration:underline;
+	color:#21c7e3;
+}
+
+.tvunidad p {
+	font-size:.62em;
+	margin:0;
+	line-height:1;
+	/*text-align:justify;*/
+}
+
+.tvicon-visited {
+	color: white;
+	background:#21c7e3;
+	border-radius: 50% 50%;
+}
+
+.tvsemana-visited a {
+	text-decoration:underline;
+	color:#21c7e3;
+	cursor: text;
+}
+
+.tvcontenedor {
+	border: solid 1px #ccc;
+	border-radius: 0 3% 3% 0;
+	display:flex;
+	flex-direction:row;
+	width: 80%;
+	justify-content:center;
+}
+
+.tvparrafo {
+	margin: 12px 0 5px 0;
+	font-family: arial;
+}
+
+.tvhr {
+	margin: 0;
+    padding: 0 0 0 12px;
+}
+
+.tvnav-menu-width-display {
+	display:inline-block;
+	min-width:100%;
+	
+}
+
+.tvnav-col {
+	margin: 0;
+	height: 50px;
+	background: #f8f8f8;
+	border:solid 1px #e7e7e7;
+	padding: 1% 0 1% 1%;
+	font-size: 1.3em;
+    margin-bottom: 10px;
+    font-family: arial;
+	min-width:100%;
+	transition:.3s;
+}
+
+.tvicon-burger {
+	width: 20px;
+    position: absolute;
+    right: 5%;
+    border: solid 1px #a59e9e;
+    padding: 5px;
+    text-align: center;
+}
+
+img {
+	max-width: 100% !important;
+}
+
+.col-xs-5 {
+	flex-direction: row-reverse;
+}
+
+.tvnav-menu-width {
+	max-width:188px;
+}
+
+
+/* MENU RESPONSIVE */
+
+@media (min-width:1024px) and (max-width:1285px) {
+	.tvcontenedor {
+		width:70%;
+	}
+}
+
+@media (max-width:1024px) {
+	.tvnav-menu-block {
+		display:block;
+		margin:0;
+		min-width:100%;
+	}
+	
+	.tvnav-menu-width {
+		display:none;
+	}
+	
+	.tvcontenedor {
+		width:100%;
+	}
+	
+	.col-xs-9 {
+		flex-basis:100%;
+		max-width:100%;
+	}
+	
+	.tvunidad {
+		font-size: 1.8em;
+	}
+	.tvsemana {
+		font-size: 1em;
+	}
+}
+
+@media (min-width:1024px) {
+	.tvnav-menu-block {
+		display:none;
+	}
+	
+	.tvnav-menu-width {
+		display:inline-block;
+	}
+}
+/**********************  MENU **********************/
+
+/**********************  Inicio estilos cursos Preg 100% virtual   **********************/
+
+.preg-100v-footer {
+	text-align: center;
+	margin: 50px;
+}
+.preg-100v-footer .icon-mini-arrow-right span {
+	float: left;
+}
+.preg-100v-footer a {
+	background: #523469;
+    text-decoration: none;
+    color: white;
+    /*margin: 30px;*/
+}
+
+.preg-100v-footer .icon-mini-arrow-left {
+	float: left;
+}
+
+.preg-100v-footer .icon-mini-arrow-right {
+	float: right;
+}
+
+
+.preg-100v-link-region div {
+	border: none !important;
+}
+
+.preg-100v-video {
+	border: 2px solid #523469 !important; 
+	padding: 2px !important; 
+	box-shadow: 5px 5px 5px #523469;
+}
+
+/**********************  Fin estilos cursos Preg 100% virtual   **********************/
+
+/* Inicio banner, icono y texto bloqueo - curso blue print */
+.cvphu_bgqc{
+    display:none !important;
+}
+
+.bpc_lock-no_toggle{
+    display:none !important;
+}
+/* Fin banner, icono y texto bloqueo - curso blue print */
+
+/* Herramientas */
+/* #right-side *+.events_list.recent_feedback,
+.ig-details__item.js-score,
+#sidebar_content .details .content .module div,
+table.grade-values,
+#right-side table.summary tr[style],
+#quiz-submission-version-table table tr td:nth-last-child(1),
+#quiz-submission-version-table table tr th:nth-last-child(1),
+.quiz-submission .quiz_score,
+ul#quiz_versions .quiz_version.selected,
+table#grades_summary thead th.assignment_score,
+#grades_summary td.assignment_score,
+#grading-box-extended,
+[data-testid="grade-display"]
+{
+	display: none;
+
+}
+#update_history_form .header .question_input{
+	display: none !important;
+}
+#quiz-submission-version-table td:nth-child(2),
+#quiz-submission-version-table th:nth-child(2){
+	display: none;
+}
+div.quiz-submission.headless{
+	display: block;
+}
+
+div[data-testid="assignment-2-student-content-tabs"] div[role="tablist"] div[role="tab"]:nth-last-child(1),
+.submission-details-header__rubric .assess_submission_link{
+	display: none;
+}
+
+#rubric_summary_holder #rubric_assessments_list_and_edit_button_holder{
+	display: none;
+} */
+/*
+nav[role="navigation"] ul#section-tabs li.section a.grades{
+	display: none;
+}
+#mobileContextNavContainer a[href*="grades"]{
+	display: none !important;
+}
+.rubric_container.rubric.for_grading {
+	display:none;
+}
+
+*/
+/* .assignment-gradebook-container .assignment.editable .Grid__GradeCell__PointsInput,
+.assignment-gradebook-container .assignment.editable .Grid__GradeCell__EndContainer button,
+#update_history_form #update_scores .update_scores_fudge{
+	display: none;
+}
+#questions.assessment_results .question_holder .question .question_points_holder{
+	display:none;
+} */
+/* Herramientas */

@@ -1,0 +1,1419 @@
+// INICIO GOOGLE ANALYTICS
+
+//Working as of Aug 28, 2019
+function removeStorage(e) { try { localStorage.removeItem(e), localStorage.removeItem(e + "_expiresIn") } catch (t) { return console.log("removeStorage: Error removing key [" + e + "] from localStorage: " + JSON.stringify(t)), !1 } return !0 } function getStorage(e) { var t = Date.now(), o = localStorage.getItem(e + "_expiresIn"); if (null == o && (o = 0), o < t) return removeStorage(e), null; try { return localStorage.getItem(e) } catch (t) { return console.log("getStorage: Error reading key [" + e + "] from localStorage: " + JSON.stringify(t)), null } } function setStorage(e, t, o) { o = null == o ? 86400 : Math.abs(o); var s = Date.now() + 1e3 * o; try { localStorage.setItem(e, t), localStorage.setItem(e + "_expiresIn", s) } catch (t) { return console.log("setStorage: Error setting key [" + e + "] in localStorage: " + JSON.stringify(t)), !1 } return !0 } async function coursesRequest(e) { let t = await fetch("/api/v1/users/self/courses?per_page=100"), o = await t.text(); o = o.substr(9), o = JSON.parse(o); var s = JSON.stringify(o); return setStorage("ga_enrollments", s, null), parseCourses(e, s) } function parseCourses(e, t) { if (null != t) { let s = JSON.parse(t); for (var o = 0; o < s.length; o++)if (s[o].id == e) return s[o] } return null } function gaCourseDimensions(e) { custom_ga("set", "dimension4", e.id), custom_ga("set", "dimension5", e.name), custom_ga("set", "dimension6", e.account_id), custom_ga("set", "dimension7", e.enrollment_term_id), custom_ga("set", "dimension8", e.enrollments[0].type), custom_ga("send", "pageview") } function googleAnalyticsCode(e) { var t, o, s, n; if (custom_ga("create", e, "auto"), t = ENV.current_user_id, o = ENV.current_user_roles, custom_ga("set", "userId", t), custom_ga("set", "dimension1", t), custom_ga("set", "dimension3", o), n = window.location.pathname.match(/\/courses\/(\d+)/)) { n = n[1], s = 0; try { let e = getStorage("ga_enrollments"); if (null != e) { var r = parseCourses(n, e); null === r ? coursesRequest(n).then(e => { null === e ? (custom_ga("set", "dimension4", n), custom_ga("send", "pageview")) : gaCourseDimensions(e) }) : gaCourseDimensions(r) } else coursesRequest(n).then(e => { null === e ? (custom_ga("set", "dimension4", n), custom_ga("send", "pageview")) : gaCourseDimensions(e) }) } catch (e) { if ((s += 1) > 5) return custom_ga("set", "dimension4", n), void custom_ga("send", "pageview") } } else custom_ga("send", "pageview") } !function (e, t, o, s, n, r, a) { e.GoogleAnalyticsObject = n, e[n] = e[n] || function () { (e[n].q = e[n].q || []).push(arguments) }, e[n].l = 1 * new Date, r = t.createElement(o), a = t.getElementsByTagName(o)[0], r.async = 1, r.src = "https://www.google-analytics.com/analytics.js", a.parentNode.insertBefore(r, a) }(window, document, "script", 0, "custom_ga");
+googleAnalyticsCode("UA-54234529-9"); // customize google analytics tracking number here
+// FIN GOOGLE ANALYTICS
+var login_students = true;
+if (document.location.href == 'https://canvas.utp.edu.pe/login/canvas?theme=admision') {
+	login_students = false;
+}
+const URL_HEROKU = 'https://rate-resources.herokuapp.com';
+
+function isMobile() {
+	if (navigator.userAgent.match(/Android/i)
+		|| navigator.userAgent.match(/webOS/i)
+		|| navigator.userAgent.match(/iPhone/i)
+		|| navigator.userAgent.match(/iPad/i)
+		|| navigator.userAgent.match(/iPod/i)
+		|| navigator.userAgent.match(/BlackBerry/i)
+		|| navigator.userAgent.match(/Windows Phone/i)
+	) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/*
+$.initialize("form[action='/logout']", function() {
+	console.log("form");
+	$(this).attr('id', 'formLogout');
+});
+*/
+if (!login_students) {
+	$('#login_form').attr('action', '/login/canvas?theme=admision');
+	if (!isMobile()) {
+		var r = document.querySelector(':root');
+		r.style.setProperty('--ic-brand-Login-body-bgd-image', 'url("https://mailing.utpxpedition.com/canvas/banner_admision.png")');
+		$("#login_form").prepend('<h3 style="color: var(--ic-brand-font-color-dark);text-align: center;">Examen de admisión UTP</h3>');
+		$('label[for="pseudonym_session_unique_id"]').text("Usuario");
+		$('.ic-Form-control--login').css({
+			display: 'block'
+		});
+
+		$('.ic-Login__actions').css({
+			display: 'flex'
+		});
+
+		$('.ic-Login__body').css({
+			padding: '20px'
+		});
+		document.getElementsByClassName('ic-Login__sso').item(0).style.display = 'none';
+	} else {
+		$('body').css({
+			background: 'url("https://mailing.utpxpedition.com/canvas/banner_admision.png")'
+		});
+		var control = document.getElementsByClassName('ic-Form-control');
+		for (var i = 0; i < control.length; i++) {
+			control[i].style.display = 'block';
+		}
+		$("#login_form").prepend('<h3 style="color: var(--ic-brand-button--primary-text);text-align: center;">Examen de admisión UTP</h3>');
+		document.getElementsByName('pseudonym_session[unique_id]')[0].placeholder = 'Usuario';
+		document.getElementsByTagName('button').item(0).style.display = 'block';
+
+		$('.error').css({ background: '#fff' });
+		//document.getElementsByClassName('ic-Login__sso').item(0).style.display = 'none';
+
+
+	}
+
+
+}
+if (login_students) {
+	if (isMobile()) {
+		var isShow = false;
+		var template = '<div class="ic-Login__sso">' +
+			'<ul class="ic-Login__sso-list">' +
+			'<li class="li-item-mobile">' +
+			'<a href="/login/microsoft" class="btnmobile Button Button--primary ic-Login__sso-button--has-text ic-Login__sso-button ic-Login__sso-button--microsoft">' +
+			'<span class="ic-Login_icon-sso ic-Login_icon-sso--icon-only" role="presentation">' +
+			'</span>' +
+			'<span class="ic-Login__sso-button__title ic-Login__sso-button__title--microsoft">Ingresar con ' +
+			'<span class="ic-Login__sso-button__title-caps">microsoft</span>' +
+			'</span>' +
+			'</a>' +
+			'</li>' +
+			'</ul>' +
+			'</div>' +
+			'<p><div id="link_canvas_mobile">Inicia con Canvas</div></p>';
+
+		var div_aux = document.createElement('div');
+		div_aux.innerHTML = template;
+
+		if ($('#login_form').length > 0) {
+			$('#login_form').append(div_aux);
+		}
+
+
+		var link_canvas = document.getElementById('link_canvas_mobile');
+
+		if (link_canvas != null) {
+			link_canvas.addEventListener('click', function () {
+				/*GLOPEZU: ALERTA TEMPORAL*/
+				today = new Date();
+				if (today >= new Date(2022, 5, 1, 0, 0, 0) && today <= new Date(2022, 5, 1, 1, 0, 0)) {
+					alert("¡Hola!\r\nEn estos momentos nos encontramos haciendo mejoras en la plataforma, para iniciar sesión haz clic en el botón de Microsoft.");
+					return;
+				}
+				/*GLOPEZU: ALERTA TEMPORAL*/
+				if (!isShow) {
+					var control = document.getElementsByClassName('ic-Form-control');
+					for (var i = 0; i < control.length; i++) {
+						control[i].style.display = 'block';
+					}
+					document.getElementsByTagName('button').item(0).style.display = 'block';
+					document.getElementsByClassName('ic-Login__sso').item(0).style.display = 'none';
+
+					document.getElementById('link_canvas_mobile').innerHTML = 'Iniciar con su correo UTP';
+					isShow = true;
+				} else {
+					var control = document.getElementsByClassName('ic-Form-control');
+					for (var i = 0; i < control.length; i++) {
+						control[i].style.display = 'none';
+					}
+					document.getElementsByTagName('button').item(0).style.display = 'none';
+					document.getElementsByClassName('ic-Login__sso').item(0).style.display = 'block';
+
+					document.getElementById('link_canvas_mobile').innerHTML = 'Inicia con Canvas';
+					isShow = false;
+				}
+			});
+		}
+
+
+
+		var menu = false;
+
+		var menubar = document.getElementById('menu-navbar');
+
+		if (menubar != null) {
+			menubar.addEventListener('click', function () {
+				if (!menu) {
+					document.getElementsByClassName('menu-shown').item(0).classList.remove('tvnav-menu-width');
+					document.getElementsByClassName('menu-shown').item(0).classList.add('tvnav-menu-width-display');
+					menubar.innerHTML = '<span style="display: block;">Menú &uarr;</span>';
+					menu = true;
+				} else {
+					document.getElementsByClassName('menu-shown').item(0).classList.remove('tvnav-menu-width-display');
+					document.getElementsByClassName('menu-shown').item(0).classList.add('tvnav-menu-width');
+					menubar.innerHTML = '<span style="display: block;">Menú &darr;</span>';
+					menu = false;
+				}
+			});
+		}
+	} else {
+		// var template = "<p><div class='ctacanvas_main'><span>Con cuenta de Canvas</span></div></p>";;
+		var template =
+			"<br /><div class='ctacanvas_main_psw'><a href='https://contrasena.utp.edu.pe/Recuperacion/OlvideMiClave.aspx' target='_blank'><span>Olvidé mi contraseña</span></a></div><div class='ctacanvas_main'><span>Con cuenta de Canvas</span></div><br>" +
+			"<div id='d_grid_login' class='grid-row' style='height:100px; background: #dedede; padding:5px 0;'>" +
+			"<div class='col-xs-12' style='color:#000;text-align: center; font-size:13px;'>" +
+			"<span style='top: 50%; position: relative; transform: translateY(-50%);'>" +
+			// "<div class='aviso' style='bborder: solid 1px gray;padding: 11px;background: #ffff0085;color: red;font-size: 10.5pt;'>Estimados alumnos y docentes, la plataforma Canvas no estará disponible <strong>en el horario de 00:00 a 02:00 del día miércoles 20 de noviembre </strong> debido a un mantenimiento no programado. Disculpen por las molestias causadas.</div>" + 
+			"<a href='https://canvas.utp.edu.pe/courses/58760' target='_blank'>Ayuda de Canvas para estudiantes</a>" +
+			"</span>" +
+			"</div>" +
+			"<div class='col-xs-12' style='color:#000;text-align: center; font-size:13px;'>" +
+			"<span style='top: 50%; position: relative; transform: translateY(-50%);'>" +
+			"<a href='https://canvas.utp.edu.pe/courses/58760/pages/protocolos-de-seguridad-para-los-laboratorios-de-la-utp' target='_blank'>Protocolos de seguridad para los laboratorios de UTP</a>" +
+			"</span>" +
+			"</div>" +
+			"<div class='col-xs-12' style='color:#000;text-align: center; font-size:13px;'>" +
+			"<span style='top: 50%; position: relative; transform: translateY(-50%);'>" +
+			"<a href='https://canvas.utp.edu.pe/courses/58818' target='_blank'>Ayuda de Canvas para docentes</a>" +
+			"</span>" +
+			"</div>" +
+			"</div>";
+		// var texto = "Para ingresar a la plataforma educativa de la UTP debe hacer clic en el siguiente botón e ingresar con sus datos del correo electrónico UTP. <p>Si tiene algún problema puede comunicarse al correo <a href='mailto:mesadeayuda@utp.edu.pe'>mesadeayuda@utp.edu.pe</a>";
+		var texto = "Para ingresar a la plataforma educativa de la UTP debe hacer clic en el siguiente botón e ingresar con sus datos del correo electrónico UTP.";
+		var template_message = "<p><div class='message_info'><span>" + texto + "</span></div></p>";
+
+		$('#login_form').css({
+			'margin': 0
+		});
+
+		$('#login_form').append(template);
+
+		$('.ic-Login__sso').prepend(template_message);
+
+
+		var isShow = false;
+		$('.ctacanvas_main').on('click', function () {
+			/*GLOPEZU: ALERTA TEMPORAL*/
+			today = new Date();
+			if (today >= new Date(2022, 5, 1, 0, 0, 0) && today <= new Date(2022, 5, 1, 1, 0, 0)) {
+				alert("¡Hola!\r\nEn estos momentos nos encontramos haciendo mejoras en la plataforma, para iniciar sesión haz clic en el botón de Microsoft.");
+				return;
+			}
+			/*GLOPEZU: ALERTA TEMPORAL*/
+			if (!isShow) {
+				$('.ctacanvas_main span').text('Ingresar con correo UTP');
+				$('.ic-Form-control--login').css({
+					display: 'block'
+				});
+
+				$('.ic-Login__actions').css({
+					display: 'flex'
+				});
+
+				isShow = true;
+			} else {
+				$('.ctacanvas_main span').text('Con cuenta de Canvas');
+				$('.ic-Form-control--login, .ic-Login__actions').css({
+					display: 'none'
+				});
+				isShow = false;
+			}
+		});
+	}
+}
+function changeLogoutAdmision() {
+
+	if ($("form:not([id])[action='/logout']").length) {
+		$("form:not([id])[action='/logout']").attr('id', 'formLogout');
+		$("#formLogout > button").click(function (e) {
+			e.preventDefault();
+			var form = $("#formLogout");
+			var actionURL = form.attr("action");
+			$.ajax({
+				type: "POST",
+				url: actionURL,
+				data: form.serialize(),
+				cache: false,
+				success: function () {
+					window.location.href = "https://canvas.utp.edu.pe/login/canvas?theme=admision";
+				},
+				error: function () {
+					//your error
+				}
+			});
+
+		});
+	}
+}
+function handleLogoutAdmision() {
+	if (isMobile()) {
+		var observerMobile = new MutationObserver(function (mutations) {
+			changeLogoutAdmision();
+		});
+		setTimeout(() => {
+			observerMobile.observe(document.querySelector('[role="dialog"]'), { attributes: false, childList: true, subtree: true, characterData: true });
+			console.log("observed added");
+		}, 1000);
+	} else {
+		changeLogoutAdmision();
+	}
+}
+$(window).bind("load", function () {
+	if (ENV.current_user.display_name.endsWith("_AUTP")) {
+		var targetNode = document.getElementById('nav-tray-portal');
+		if (targetNode) {
+			var config = { attributes: true, childList: true, subtree: true, characterData: true };
+			var observer = new MutationObserver(function (mutations) {
+				console.log("#nav-tray-portal div changed!");
+				handleLogoutAdmision();
+				// stop observing
+				//observer.disconnect();      
+			});
+			observer.observe(targetNode, config);
+		}
+	}
+
+})
+/*
+
+ */
+
+var menu = false;
+$('#menu-navbar').on('click', function () {
+	if (!menu) {
+		$('.menu-shown').removeClass('tvnav-menu-width').addClass('tvnav-menu-width-display');
+		$('#menu-navbar').html('<span style="display: block;">Menú &uarr;</span>');
+		menu = true;
+	} else {
+		$('.menu-shown').removeClass('tvnav-menu-width-display').addClass('tvnav-menu-width');
+		$('#menu-navbar').html('<span style="display: block;">Menú &darr;</span>');
+		menu = false;
+	}
+});
+
+/******* PUNTUACIÓN DE RECURSOS ******/
+
+const HEADTEMPLATE = '<p class="close__button">' +
+	'<button onclick="closePopover()" class="Button Button--icon-action" type="button">' +
+	'<i class="icon-x"></i></button></p>'
+
+function starts() {
+
+	var course = ENV.context_asset_string.split('_')[1];
+	var type_resource = document.location.pathname.toString().split('/');
+	var equivalences = {
+		5: 1,
+		4: 2,
+		3: 3,
+		2: 4,
+		1: 5,
+		0: 0
+	}
+
+	$.get(URL_HEROKU + '/getPuntos/' + course + '/' + type_resource[type_resource.length - 1])
+		.done(function (data) {
+			var total_rate = 0;
+
+			if (data !== "empty")
+				total_rate = Math.round(data[0]['data']['point'] / data[0]['data']['total_votes']);
+
+			var html = '<br /><div id="rating-item"><span>Califica este contenido: </span><span class="clasificacion">';
+			var html2 = '<div id="rating-item"><span>Valora este video: </span><span class="clasificacion">';
+			var html3 = '<div id="rating-item"><span class="clasificacion">';
+			var counter = 5;
+			for (var i = 1; i <= 5; i++) {
+
+				var checked = (i == equivalences[total_rate]) ? "checked" : "";
+
+				html += '<input id="radio' + i + '" type="radio" ' + checked + ' name="estrellas" value="' + counter + '">';
+				html += '<label id="label' + i + '" tabindex="0" aria-label="Valorar en ' + counter + '" role="button" for="radio' + i + '" onclick="rating_resource(' + counter + ')" onkeyup="rating_resource_on_enter(' + counter + ')">★</label>';
+
+				html2 += '<input id="radio' + i + '" type="radio" ' + checked + ' name="estrellas" value="' + counter + '">';
+				html2 += '<label id="label' + i + '" tabindex="0" aria-label="Valorar en ' + counter + '" role="button" for="radio' + i + '" onclick="rating_resource(' + counter + ')" onkeyup="rating_resource_on_enter(' + counter + ')">★</label>';
+
+				html3 += '<input id="radio' + i + '" type="radio" ' + checked + ' name="estrellas" value="' + counter + '">';
+				html3 += '<label id="label' + i + '" tabindex="0" aria-label="Valorar en ' + counter + '" role="button" for="radio' + i + '" onclick="rating_resource(' + counter + ')" onkeyup="rating_resource_on_enter(' + counter + ')">★</label>';
+				counter--;
+			}
+			html += '</span><div id="popover_content" class="initial_class_popover"></div></div><br />';
+			html2 += '</span><div id="popover_content" class="initial_class_popover"></div></div><br />';
+			html3 += '</span><div id="popover_content" style="left:-120px" class="initial_class_popover"></div></div><br />';
+
+			var str = document.location.href;
+			var match = str.match(/https:\/\/canvas.utp.edu.pe\/courses\/([0-9]+)/g)
+			var not_match_init_page_but_others = str.match(/https:\/\/canvas.utp.edu.pe\/courses\/([0-9]*)\/[^a|g|q|u|c].+/g)
+
+			if (match) {
+				if ($('#content').length > 0) {
+					if ($('#context_modules_sortable_container').length == 0) {
+						if ($('.page-title').text() != "¿Qué te pareció este curso?") {
+							if ($('#valorar-recurso').length != 1 && $('#valorar-pagina').length != 1 && not_match_init_page_but_others) {
+								$('#content').prepend(html);
+							}
+							$('#valorar-recurso').prepend(html2);
+							$('#valorar-pagina').prepend(html3);
+						}
+					}
+				}
+			}
+		});
+}
+
+function closePopover() {
+	let div = $('#popover_content')
+	div.css({ 'display': 'none' })
+}
+
+function getPosition(element) {
+	var xPosition = 0;
+	var yPosition = 0;
+
+	while (element) {
+		xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+		yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+		element = element.offsetParent;
+	}
+
+	return { x: xPosition, y: yPosition };
+}
+
+async function renderPopover() {
+	let div = $('#popover_content')
+
+	let outerheight;
+
+	let element = document.querySelector('#rating-item')
+	let offset = getPosition(element);
+
+	let className = (offset.y > 500) ? 'popover__content' : 'popover__content__down'
+
+	div.removeAttr('class').attr('class', className)
+
+	const fetch_options = await fetch(URL_HEROKU + '/getoptionsfeedback')
+	const result_options = await fetch_options.json();
+
+	const { response } = result_options;
+
+	let area_message_template = HEADTEMPLATE +
+		'<p class="popover__message">¿Qué crees que debería mejorar?</p>' +
+		'</div><div class="container__message" id="container__message">' +
+		'<textarea class="textarea__message" rows="7" cols="40"></textarea>' +
+		'<button onclick="handleFeedback()" class="Button Button--primary" type="button">Enviar</button></div>';
+
+	if (response !== 'empty') {
+		area_message_template = HEADTEMPLATE +
+			'<p class="popover__message">¿Qué crees que debería mejorar?</p>' +
+			'</div><div class="container__options" id="container__message">'
+
+		response.forEach(option => {
+
+			const { id, data } = option
+
+			area_message_template += '<div class="ic-Form-control ic-Form-control--checkbox">' +
+				'<input type="checkbox" class="control--checkbox" id="' + id + '" value="' + data.description + '">' +
+				'<label class="ic-Label" for="' + id + '">' + data.description + '</label></div>'
+		})
+
+		area_message_template += '<div class="other-option ic-Form-control ic-Form-control--checkbox">' +
+			'<input type="checkbox" id="another_option">' +
+			'<label class="ic-Label" for="another_option">Otro&nbsp;</label>' +
+			'<input type="text" disabled style="height: 1.8em;" id="text-input-feedback" class="ic-Input">' +
+			'</div></div><br /><div class="button__enviar"><button onclick="handleFeedback()" class="Button Button--primary" type="button">Enviar</button></div>';
+	}
+
+	div.empty().html(area_message_template)
+
+	outerheight = ($('#valorar-recurso').length != 1 && $('#valorar-pagina') != 1)
+		? 'translate(0px, 10px)' : 'translate(0px, 20px)'
+
+	let top = (offset.y > 500) ? '-' + (div.outerHeight(true) + 45) + 'px' : 'inherit'
+	console.log(offset.y)
+	div.css({
+		'display': 'block',
+		'transform': outerheight,
+		'z-index': 10,
+		'top': top
+	})
+
+	$('#another_option').on('click', function () {
+		if ($('#another_option').is(':checked')) {
+			$('#text-input-feedback').removeAttr('disabled')
+		} else {
+			$('#text-input-feedback').attr('disabled', 'disabled')
+			$('#text-input-feedback').val('')
+		}
+	})
+}
+
+function sendRequest(endpoint, args) {
+	return new Promise((resolve, reject) => {
+		fetch(URL_HEROKU + '/save-feedback/' + endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(args)
+		})
+			.then(resp => resp.json())
+			.then(data => {
+				let element = document.querySelector('#rating-item')
+				let div = $('#popover_content')
+				let offset = getPosition(element);
+
+				let htmlGreeting = HEADTEMPLATE + '<div class="greetings__container">' +
+					'<div class="face__container">😊</div>' +
+					'<div style="margin: .2em"><span class="greetings_comment">' +
+					'¡Muchas gracias por tu comentario!</span></div></div>'
+
+				div.empty().html(htmlGreeting)
+
+				let top = (offset.y > 500) ? '-' + (div.outerHeight(true) + 45) + 'px' : 'inherit'
+
+				div.css({ 'top': top })
+
+				setTimeout(() => {
+					$('#popover_content').fadeOut(function () {
+						$('#greetings').remove()
+					})
+				}, 3000)
+				resolve(data)
+			})
+			.catch(error => { reject(error) })
+	})
+}
+
+function saveCommentFeedback(payload) {
+	const ENDPOINT = 'comments_feedback'
+	let object_payload = ""
+	let isValid = false
+
+	if ($('.textarea__message').length === 1) {
+		let feedback = document.querySelector('.textarea__message').value;
+
+		if (feedback !== "") isValid = true
+
+		object_payload = { ...payload, comment: feedback }
+
+	} else {
+		let checkValues = [];
+		let inputChecks = document.querySelectorAll('.control--checkbox')
+
+		inputChecks.forEach(elem => {
+			if (elem.checked) checkValues.push(elem.value)
+		})
+
+		if (document.querySelector('#another_option').checked)
+			checkValues.push('Otros: ' + document.querySelector('#text-input-feedback').value)
+
+		if (checkValues.length > 0) isValid = true;
+
+		object_payload = { ...payload, comment: checkValues.join('|') }
+	}
+	if (isValid)
+		sendRequest(ENDPOINT, object_payload).then(resp => console.log(resp))
+}
+
+function handleFeedback() {
+	let type_resource = document.location.pathname.toString().split('/');
+	let name_resource = $('#breadcrumbs ul li span').last().text();
+
+	let payload = {
+		course: ENV.context_asset_string,
+		resource: type_resource[type_resource.length - 1],
+		name_resource: name_resource,
+		type: type_resource[3],
+		roles: ENV.current_user_roles.join('|'),
+		fecha: new Date().toLocaleString()
+	}
+
+	saveCommentFeedback(payload)
+}
+
+function rating_resource(point) {
+	var type_resource = document.location.pathname.toString().split('/');
+	var name_resource = $('#breadcrumbs ul li span').last().text();
+	$.post(URL_HEROKU + '/save', {
+		course: ENV.context_asset_string,
+		point: point,
+		resource: type_resource[type_resource.length - 1],
+		name_resource: name_resource,
+		type: type_resource[3]
+	}).done(function (data) {
+		console.log(data)
+		if (point < 5) renderPopover()
+	})
+}
+
+function rating_resource_on_enter(point) {
+	var key = 0;
+	// Determine the key pressed, depending on whether window.event or the event object is in use
+	if (window.event) {
+		key = window.event.keyCode;
+	} else if (event) {
+		key = event.keyCode;
+	}
+	// Was the Enter or Space key pressed?
+	if (key == 13 || key == 32) {
+		return rating_resource(point);
+	}
+	// The event has not been handled, so return true
+	return true;
+}
+
+var str = document.location.href;
+var match = str.match(/https:\/\/canvas.utp.edu.pe\/courses\/([0-9]*)/g);
+
+if (match) {
+	$.getJSON(URL_HEROKU + "/getAllowCourses/" + match[0].split("/")[4])
+		.done(function (data) {
+			console.log('el curso es ', data[0]["id"]);
+
+			setTimeout(starts, 1000);
+		})
+		.fail(function (err) {
+			if (err.responseText == "empty") {
+				console.log('el curso no va ');
+			}
+		})
+} else if (window.location.href.indexOf('courses/58836') != -1) {
+	setTimeout(starts, 1000);
+}
+/****************************************/
+
+/********** BOTÓN AL CALENDARIO *********/
+
+function calendarButton() {
+    var BITLY_URL = 'https://bit.ly/3OvapS0';
+    var str = document.location.href;
+    var match = str.match(/https:\/\/canvas.utp.edu.pe\/courses\/(435543|446221|475997)\/modules/g);
+
+    var calendar_button = '<a class="btn btn-warning" id="additional_calendar_button" target="_blank" rel="nofollow" href="' + BITLY_URL + '"><i class="icon-calendar-month"></i> Calendario</a>'
+
+    if (match) {
+        if ($('#context_modules_sortable_container').length > 0) {
+            var calendar_orig_button = $('#global_nav_calendar_link');
+            var calendar_orig_button_parent = calendar_orig_button.closest("li");
+            calendar_orig_button.attr("href", BITLY_URL)
+            calendar_orig_button_parent.css('background', '#fc5e13');
+
+            $('.header-bar-right__buttons').prepend(calendar_button);
+        }
+    }
+}
+
+setTimeout(calendarButton, 1000);
+
+/****************************************/
+
+/************ ACCORDION STYLE CANVAS *********/
+setTimeout(function () {
+	$('.accordion-header-canvas a.header-link').each(function () {
+		var _self = $(this);
+		_self.click(function (e) {
+			e.preventDefault();
+			var href = _self.attr('href');
+			var _parent = _self.parent();
+
+			$('.accordion-panel-canvas').not("#" + href).slideUp(function () {
+				$('#' + href).css({
+					'display': 'none'
+				});
+				$('.accordion-panel-canvas').removeClass('ui-accordion-content-active')
+				$('.accordion-header-canvas span').removeClass('ui-icon-triangle-1-s').addClass('ui-icon-triangle-1-e');
+			})
+
+			$('#' + href).slideDown(function () {
+				$('#' + href).css({
+					'display': 'block'
+				});
+
+				_self.prev().removeClass('ui-icon-triangle-1-e').addClass('ui-icon-triangle-1-s')
+				$('#' + href).addClass('ui-accordion-content-active')
+			})
+		})
+	})
+
+}, 1000)
+
+/*Inicio agregar enlace de formulario para curso 100vir*/
+var link_canvas = document.location.href;
+if ($("#comentar-recurso").length > 0) {
+	$('#comentar-recurso').attr("href", "https://docs.google.com/forms/d/e/1FAIpQLScbe0N3aw_33qSRyME3lpgS0yg6J2MjPAgUB1bDISSExqZLFA/viewform?usp=pp_url&entry.2040497964=" + link_canvas)
+}
+/*Fin agregar enlace de formulario para curso 100vir*/
+
+/*Inicio agregar enlace de formulario para curso induccion docente 100vir*/
+var link_canvas = document.location.href;
+if ($("#comentar-pagina-1").length > 0) {
+	$('#comentar-pagina-1').attr("href", "https://docs.google.com/forms/d/e/1FAIpQLSfX0BWjfuNz3bNSdleYLW-DRrNjy2j8RxIlRRnURybmUAtAGw/viewform?usp=pp_url&entry.2040497964=" + link_canvas)
+}
+/*Fin agregar enlace de formulario para curso induccion docente 100vir*/
+
+/*Iniciar - agregar link iframe encuesta prerellenada*/
+if ($("#add-link-iframe").length > 0) {
+	$('#add-link-iframe').attr("src", "https://docs.google.com/forms/d/e/1FAIpQLScWQWhqpbnihSXoweKpf-JH2IuWd0eDqvo5rgGfCH5KtysANA/viewform?embedded=true?usp=pp_url&entry.29952327=" + link_canvas)
+}
+/*Fin - agregar link iframe encuesta prerellenada*/
+
+/* Inicio borrar paneles laterales y los titulos de un curso recomendados solo para paginas de puro contenido*/
+var str = document.location.href;
+if (ENV.context_asset_string == 'course_58818' || ENV.context_asset_string == 'course_58760' || ENV.context_asset_string == 'course_145649' || ENV.context_asset_string == 'course_27500') {
+
+	if ($('#right-side-wrapper').length > 0) {
+		$('#right-side-wrapper').css({
+			'display': 'none'
+		});
+	}
+
+	$('#main').css({
+		'margin-left': 0
+	});
+
+	$('.header-bar-outer-container').css({
+		'display': 'none'
+	});
+
+	// $('#wiki_page_show, .header-bar-outer-container').css({
+	// 	'display': 'none'
+	// });
+
+	$('.ic-app-nav-toggle-and-crumbs').css({
+		'display': 'none'
+	});
+
+	$('.page-title').css({
+		'display': 'none'
+	});
+
+	$('#left-side, #courseMenuToggle').css({
+		'display': 'none'
+	});
+
+	$('.ic-Layout-contentMain').css({
+		'padding': '20px 0px'
+	});
+
+}
+
+// if(window.location.href.indexOf('courses/58760') > -1) {
+
+// 	if($('#right-side-wrapper').length > 0) {
+// 		$('#right-side-wrapper').css({
+// 			'display' : 'none'
+// 		});
+// 	}
+
+// 	$('#main').css({
+// 		'margin-left': 0
+// 	});
+
+// 	$('.header-bar-outer-container').css({
+// 		'display': 'none'
+// 	});
+
+// 	// $('#wiki_page_show, .header-bar-outer-container').css({
+// 	// 	'display': 'none'
+// 	// });
+
+// 	$('.ic-app-nav-toggle-and-crumbs').css({
+// 		'display': 'none'
+// 	});
+
+// 	$('.page-title').css({
+// 		'display': 'none'
+// 	});
+
+// 	$('#left-side, #courseMenuToggle').css({
+// 		'display':'none'
+// 	});
+
+// 	$('.ic-Layout-contentMain').css({
+// 		'padding':'20px 0px'
+// 	});
+
+// }
+
+// var mivariable = "hola"
+// if(window.location.href.indexOf('courses/100925') > -1) {
+// 	// alert(mivariable);
+// 	// $('.module-sequence-padding').attr('id','startutp')
+// 	// $('#wiki_page_show').prepend(mivariable);
+// 	// $('#wiki_page_show, .content-box').append("hola");
+// 	// var change = document.getElementsByClassName("module-sequence-padding");
+// 	// change[0].innerHTML = "<div>Hola</div>";
+// }
+
+/* Fin borrar paneles laterales y los titulos de un curso*/
+
+/*********************************************/
+
+/************ BANNER PEPE TEMPORAL *****/
+
+// var str = document.location.href;
+// var match = str.match(/https:\/\/canvas.utp.edu.pe\/courses\/([0-9]*)$/g);
+
+// if (match) {
+// 	$.getJSON(URL_HEROKU + "/getcoursespepe/" + match[0].split("/")[4])
+// 		.done(function (data) {
+// 			console.log('el curso para pepe es ', data[0]["id"]);
+
+// 			setTimeout(function () {
+// 				$('#content-wrapper').prepend('<div id="dpepe" style="padding:0 20px;"><a href="https://pepestudent.page.link/K2YS" target="_blank"><img src="https://dl.dropbox.com/s/jlisdqeuvtt8env/banner_pepe.png" ></a></div>');
+// 			}, 1000);
+// 		})
+// 		.fail(function (err) {
+// 			if (err.responseText == "empty") {
+// 				console.log('el curso no va ');
+// 			}
+// 		})
+// } else if (window.location.href.indexOf('courses/58836') != -1) {
+// 	setTimeout(starts, 1000);
+// }
+
+
+// if ($('#main').length > 0) {
+// 	setTimeout(function () {
+// 		$('.module-sequence-footer-content a').each(function () {
+// 			if ($(this).attr('href').indexOf('courses/20/') > -1) {
+// 				$('.module-sequence-footer').css({
+// 					'display': 'none'
+// 				});
+// 			}
+// 		});
+// 	}, 1000);
+
+// } else {
+// 	console.log('no lo encuentra');
+// }
+
+// if (window.location.href.indexOf('courses/32946') > -1 || window.location.href.indexOf('courses/44940') > -1) {
+// 	if (window.location.href.indexOf('courses/44940') > -1 || window.location.href.indexOf('courses/32946') > -1) {
+// 		if ($('#right-side-wrapper').length > 0) {
+// 			$('#right-side-wrapper').css({
+// 				'display': 'none'
+// 			});
+// 		}
+// 	}
+
+// 	$('#left-side, #courseMenuToggle').css({
+// 		'display': 'none'
+// 	});
+
+// 	$('#main').css({
+// 		'margin-left': 0
+// 	});
+// }
+
+/************ BANNER PEPE TEMPORAL fin *****/
+
+// Inicio Chatbot
+var put_chat_bot = false;
+var link_iframe = "";
+
+if (window.location.href.indexOf('courses/42004') != -1) {
+
+	link_iframe = "https://dtautp.bitbucket.io/chatcursoinduccion/index.html?uname=" + ENV.current_user.display_name;
+	put_chat_bot = true;
+}
+
+if (window.location.href.indexOf('courses/78353') != -1) {
+	link_iframe = "https://dtautp.bitbucket.io/chatcomunidaddocente/index.html?uname=" + ENV.current_user.display_name;
+	put_chat_bot = true;
+}
+
+if (window.location.href.indexOf('courses/109345') != -1) {
+	link_iframe = "https://dtautp.bitbucket.io/chatcomunidaddocente/index.html?uname=" + ENV.current_user.display_name;
+	put_chat_bot = true;
+}
+
+// if(window.location.href.indexOf('courses/109962') != -1) {
+//     link_iframe = "https://dtautp.bitbucket.io/chatcomunidaddocente/index.html?uname=" + ENV.current_user.display_name;
+//     put_chat_bot = true;
+// }
+
+if (put_chat_bot) {
+	$('body').append(
+		'<div id="maindivbots">' +
+		'<div class="titlebarchatbot"><div>Amigo DTA</div><div class="closebot">X</div></div>' +
+		'<iframe id="frame" class="b_frame" src="' + link_iframe + '"></iframe>' +
+		'</div>' +
+		'<div id="badgechatbot"></div>'
+	);
+
+	$('.closebot').on('click', function () {
+		$('#maindivbots').css({
+			'display': 'none'
+		});
+
+		$('#badgechatbot').css({
+			'display': 'block'
+		})
+	});
+
+	$('#badgechatbot').on('click', function () {
+		$('#maindivbots').css({
+			'display': 'block'
+		});
+
+		$('#badgechatbot').css({
+			'display': 'none'
+		})
+	})
+}
+
+// Fin Chatbot
+
+/********************* SCRIPT GOOGLE API SHEET **************************/
+/*********************                         **************************/
+
+
+// CONSULTA NOTAS UTP CGT
+setTimeout(function () {
+	if ($('#btnCronogramaActividades').length > 0) {
+
+		document.getElementById('btnCronogramaActividades').addEventListener('click', function () {
+			$('#resultado-notas').html('Consultado notas, espere por favor...');
+			$.ajax({
+				url: "https://cronograma-actividades.herokuapp.com/getValues/utp/" + ENV.current_user.id + "/" + $('#btnCronogramaActividades').attr('name'),
+				type: "GET",
+				dataType: 'json'
+			})
+				.done(function (data) {
+					if (data.error) {
+						$('#resultado-notas').html('<span style="background:#fd0232; color:white; padding:.2em .5em;">' +
+							'Actualmente hay problemas para mostrar la información, intentelo en unos minutos, si el problema persiste consulte al Administrador de la plataforma.' +
+							'</span>');
+						return false;
+					}
+					data.user = Object.values(data.user);
+
+					console.log(data);
+
+					if (data.user.length == 0) {
+						$('#resultado-notas').html('<span style="background:#fd0232; color:white; padding:.2em .5em;">' +
+							'No hay datos con el usuario actual, probablemente no este dictando cursos en la modalidad, consulte al Administrador de la plataforma.' +
+							'</span>');
+
+						return false;
+					}
+
+					$('#factualizado').html("Esta información está actualizada al: " + data.update);
+
+					var i = 0;
+					var colors = {
+						0: "border-right: solid 1px #a5afb5;font-weight: bold;",
+						2: "border-right: solid 1px #a5afb5;font-weight: bold;background: #e8f2ff;",
+						3: "border-right: solid 1px #a5afb5;font-weight: bold;",
+						5: "border-right: solid 1px #a5afb5;font-weight: bold;background: #e8f2ff;",
+						7: "border-right: solid 1px #a5afb5;font-weight: bold;",
+						9: "border-right: solid 1px #a5afb5;font-weight: bold;background: #e8f2ff;",
+						11: "border-right: solid 1px #a5afb5;font-weight: bold;",
+						13: "border-right: solid 1px #a5afb5;font-weight: bold;background: #e8f2ff;",
+						15: "border-right: solid 1px #a5afb5;font-weight: bold;",
+					}
+
+					var allowColumns = [0, 2, 3, 5, 7, 9, 11, 13, 15];
+
+					var table = '<table class="ic-Table ic-Table--hover-row ic-Table--striped"><thead><tr>';
+
+					data.header.map(function (item) {
+						if (allowColumns.indexOf(i) != -1) {
+							var stylerow = (typeof colors[i] != "undefined") ? colors[i] : "";
+							let headersValue = item
+
+							table += '<th style="text-align:center;' + stylerow + '">' + headersValue + '</th>';
+						}
+						i++;
+					});
+
+					table += '</tr></thead><tbody>';
+
+					data.user.map(function (itemId) {
+						i = 0;
+						table += '<tr style="font-size:.9em; height:60px">';
+
+						itemId.map(function (user) {
+							if (allowColumns.indexOf(i) != -1) {
+								let fieldValue = '<a title="' + itemId[i + 1] + '" data-tooltip="{&quot;tooltipClass&quot;:&quot;popover popover-padded&quot;, &quot;position&quot;:&quot;right&quot;}">' + user + '</a>';
+
+								var stylerow = (typeof colors[i] != "undefined") ? colors[i] : "";
+
+								if (user == 'no aplica' || i == 0 || i == 2) {
+									fieldValue = user
+								}
+
+								table += '<td style="text-align:center;' + stylerow + '">' + fieldValue + '</td>';
+							}
+							i++;
+						});
+
+						table += '</tr>';
+					});
+					table += '<tbody></table><br /><div id="containerDetalle"></div>';
+
+					$('#resultado-notas').html(table);
+
+					$.post("https://cronograma-actividades.herokuapp.com/Insert/utp", {
+						id: ENV.current_user.id,
+						name: ENV.current_user.display_name,
+						course: ENV.COURSE_ID,
+						title: ENV.WIKI_PAGE.title,
+						modalidad: 'CGT'
+					})
+						.done(function (data) {
+							console.log('Registrado', data);
+						})
+
+					$(document).scrollTop($(document).height());
+				});
+		})
+	}
+
+}, 1000)
+
+// CONSULTA NOTAS UTP PREGRADO
+setTimeout(function () {
+	if ($('#btnconsultaNotas').length > 0) {
+		console.log('ok button');
+		document.getElementById('btnconsultaNotas').addEventListener('click', function () {
+
+			$('#resultado-notas').html('Consultado notas, espere por favor...');
+			$.ajax({
+				url: "https://apigooglesheet.herokuapp.com/getValues/utp/" + $('#btnconsultaNotas').attr('name') + "/" + ENV.current_user.id,
+				type: "GET",
+				dataType: 'json'
+			})
+				.done(function (data) {
+
+					data.user = Object.values(data.user);
+
+					if (data.user.length == 0) {
+						$('#resultado-notas').html('<span style="background:#fd0232; color:white; padding:.2em .5em;">' +
+							'No hay datos con el usuario actual, consulte al Administrador de la plataforma.' +
+							'</span>');
+
+						return false;
+					}
+
+					var i = 0;
+					var colors = {
+						2: "border-right: solid 1px #a5afb5;font-weight: bold;background: #a9d0ff;",
+						6: "border-right: solid 1px #a5afb5;font-weight: bold;background: #a9ffc7;",
+						8: "border-right: solid 1px #a5afb5;font-weight: bold;background: #ffc1a9;",
+						10: "border-right: solid 1px #a5afb5;font-weight: bold;background: #e6a9ff;",
+						12: "border-right: solid 1px #a5afb5;font-weight: bold;background: #c6e663;",
+						15: "border-right: solid 1px #a5afb5;font-weight: bold;background: #a9d0ff;",
+						17: "border-right: solid 1px #a5afb5;font-weight: bold;background: #fffb7a;"
+					}
+
+					var table = '<div class="divUpdateMessage">Este reporte se actualiza todos los <strong>Miércoles</strong>' +
+						' y contiene información actualizada al: <br /> <strong style="color:red;">' + data.updated + ' </strong></div>';
+					table += '<table class="ic-Table ic-Table--hover-row ic-Table--striped"><thead><tr>';
+
+					data.header.map(function (item) {
+						var stylerow = (typeof colors[i] != "undefined") ? colors[i] : "";
+						table += '<th style="text-align:center;' + stylerow + '">' + item + '</th>';
+						i++;
+					});
+
+					table += '</tr></thead><tbody>';
+
+					data.user.map(function (itemId) {
+						i = 0;
+						table += '<tr>';
+						itemId.map(function (user) {
+							var stylerow = (typeof colors[i] != "undefined") ? colors[i] : "";
+							table += '<td style="text-align:center;' + stylerow + '">' + user + '</td>';
+							i++;
+						});
+						table += '</tr>';
+					});
+					table += '<tbody></table>';
+					$('#resultado-notas').html(table);
+					$(document).scrollTop($(document).height());
+
+					$.post("https://apigooglesheet.herokuapp.com/Insert/utp", {
+						id: ENV.current_user.id,
+						name: ENV.current_user.display_name,
+						course: ENV.COURSE_ID,
+						title: ENV.WIKI_PAGE.title,
+						modalidad: 'PREGRADO'
+					})
+						.done(function (data) {
+							console.log('Registrado', data);
+						})
+				});
+		});
+	}
+}, 1000)
+
+/*************************************************************/
+/************************ ANUNCIO VIDEOCONFERENCIAS DOCENTES *************************/
+
+if (ENV.current_user_roles != null && ENV.current_user_roles.length <= 2) {
+	var str = document.location.href;
+	var match = str.match(/https:\/\/canvas.utp.edu.pe\/courses\/([0-9]*)\/external_tools\/858/g);
+	var match_assignment = str.match(/https:\/\/canvas.utp.edu.pe\/courses\/([0-9]*)\/assignments\/([0-9]*)/g);
+	var tarea = str.match(/https:\/\/canvas.utp.edu.pe\/courses\/([0-9]*)\/assignments\/([0-9]*)/g);
+
+	if (match) {
+		var html_announcement = '<center><h4 style="color: #2e82a9; font-weight: bold;">Recomendaciones importantes para la videconferencia</h4></center>' +
+			'<div style="border: solid 1px #c7cdd1; margin-bottom: 20px; background: #f9ffd8; height: 250px; padding: 1%;">' +
+			'<ol><li style="padding: 1% 0;">Recuerda utilizar Google Chrome <img src="https://dl.dropbox.com/s/cl1rsiq2qzt8iqx/chrome.png" style="width: 30px; vertical-align: middle;"></li>' +
+			'<li style="padding: 1% 0;">Debes tener al menos <strong>1 Mbps de descarga</strong> en tu velocidad de Internet. <a href="http://bit.ly/2EmYJ0T" target="_blank">Mídelo aquí</a></li>' +
+			'<li style="padding: 1% 0;">Si te conectas desde tu celular <img src="https://dl.dropbox.com/s/wmayyxdstl5zu27/movile.png" style="width: 30px; vertical-align: middle;"> debes decargar la aplicacion de Blackborad <img src="https://dl.dropbox.com/s/uwdexcpndxayeh4/unnamed.webp" style="width: 30px; vertical-align: middle;"> desde <a href="http://bit.ly/2QdlhGa" target="_blank">Play Store</a> o <a href="https://itunes.apple.com/es/app/blackboard/id950424861?mt=8" target="_blank">App Store</a> y lee el <a href="http://bit.ly/2JswYZf" target="_blank">siguiente manual</a> de cómo ingresar</li>' +
+			'<li style="padding: 1% 0;">Evita que los miembros de tu familia usen el Internet cuando estás en una videconferencia</li>' +
+			'<li style="padding: 1% 0;">Si escuchas el audio entrecortado y tu docente tiene activada su cámara recomiéndale que no la active</li></ol>' +
+			'</div>';
+		if ($('iframe#tool_content').length != -1) {
+			$(html_announcement).insertBefore('iframe#tool_content');
+		}
+
+	}
+
+	if (match_assignment) {
+		// var html_announcement = '<center><h1 style="color: #ff2c02; font-weight: bold; font-size: 2em;">IMPORTANTE</h1></center>' + 
+		// '<div style="border: solid 1px #c7cdd1; margin-bottom: 20px; background: #fef2a2; height: auto; padding: 2%;"><strong style="color: #2e82a9;">NO coloques caracteres especiales como @ # $ % &, tildes ni dejes espacios en blanco</strong> en el nombre del archivo que subas a Canvas. <br /><br /><strong style="color: #2e82a9;">Revisa si tu archivo subió correctamente</strong> haciendo click en <strong style="color: #2e82a9;">descargar</strong>. Ubícalo en la parte derecha de su pantalla</div>';
+		if ($('.assignment-title').length != -1) {
+			// $(html_announcement).A('.assignment-title');
+			$('<div style="border: solid 1px #c7cdd1; margin-bottom: 20px; background: #fef2a2; height: auto; padding: 2%;"><strong style="color: #2e82a9;">NO coloques caracteres especiales como @ # $ % &, tildes ni dejes espacios en blanco</strong> en el nombre del archivo que subas a Canvas. <br /><br /><strong style="color: #2e82a9;">Revisa si tu archivo subió correctamente</strong> haciendo click en <strong style="color: #2e82a9;">descargar</strong>. Ubícalo en la parte derecha de su pantalla</div>').insertBefore('button.cancel_button');
+		}
+	}
+	// if (tarea) {
+	// 	var html_announcement = '<div style="border: solid 1px #c7cdd1; margin-bottom: 20px; background: #f9ffd8; height: auto; padding: 2%;">Si no te aparece el botón de <strong>"entregar tarea"</strong> fijate en las indicaciones y en la fecha de vencimiento, en caso contrario comunicalo a tu docente adjuntando una captura de pantalla. Recuerda que también puedes usar el foro de dudas y consultas.</div>';
+	// 	if ($('.assignment-title').length != -1) {
+	// 		$(html_announcement).insertBefore('.assignment-title');
+	// 	}
+	// }
+
+} else if (ENV.current_user_roles != null && ENV.current_user_roles.indexOf('teacher') != -1) {
+
+	var str = document.location.href;
+	var match = str.match(/https:\/\/canvas.utp.edu.pe\/courses\/([0-9]*)\/external_tools\/858/g);
+	var zoom_preg = str.match(/https:\/\/canvas.utp.edu.pe\/courses\/([0-9]*)\/external_tools\/1708/g);
+	var zoom_cgt = str.match(/https:\/\/canvas.utp.edu.pe\/courses\/([0-9]*)\/external_tools\/1709/g);
+	var tarea_config = str.match(/https:\/\/canvas.utp.edu.pe\/courses\/([0-9]*)\/assignments\/([0-9]*)/g);
+
+	if (match) {
+		var html_announcement = '<h2 style="color:#800000;">¡Importante!</h2><h4 style="color: #2e82a9; font-weight: bold;">Toma en cuenta lo siguiente cuando tengas que realizar una videoconferencia:</h4>' +
+			'<div style="border: solid 1px #c7cdd1; margin-bottom: 20px; background: #f9ffd8; height: 290px; padding: 1%;">' +
+			'<ol><li style="padding: 1% 0;">Usa el navegador Google Chrome <img src="https://dl.dropbox.com/s/cl1rsiq2qzt8iqx/chrome.png" style="width: 30px; vertical-align: middle;"></li>' +
+			'<li style="padding: 1% 0;">Debes tener al menos <strong>4 Mbps de descarga y 1Mbps de subida</strong> en tu velocidad de Internet. <a href="http://bit.ly/2EmYJ0T" target="_blank">Mídelo aquí</a></li>' +
+			'<li style="padding: 1% 0;">Para ingresar a la sala de videoconferencias primero <strong>haz click en el nombre de la sala del curso</strong>, luego, <strong>selecciona la opción "Unirse a la sala del curso". </strong> <a href="http://bit.ly/2WWOVWc" target="_blank">Ver imagen</a></li>' +
+			'<li style="padding: 1% 0;">Si el audio de tu videoconferencia se escucha entrecortado  y tu cámara esta activada, desactivala.</li>' +
+			'<li style="padding: 1% 0;">Si estas conectado a una red WIFI procura que otros miembros de tu familia no estén utilizándola en tu hora de videoconferencia.</li>' +
+			'<li style="padding: 1% 0;">Para mas detalles <a href="http://dta.utp.edu.pe/wp-content/uploads/2017/10/manual_videoconferencias_bb_docentes.pdf" target="_blank">ver el manual sobre videoconferencias</a> o  <a href="https://canvas.utp.edu.pe/courses/58818/modules/items/2624997" target="_blank">ver el videotutorial</a>.</li></ol>'
+		'</div>';
+		if ($('iframe#tool_content').length != -1) {
+			$(html_announcement).insertBefore('iframe#tool_content');
+		}
+	}
+	if (zoom_preg) {
+		var html_announcement = '<div style="border: solid 1px #c7cdd1; margin-bottom: 20px; background: #f9ffd8; height: 130px; padding: 1%;">' +
+			'<h4 style="color: black">Estimado docente, si tienes algún incoveniente con la <strong>herramienta Zoom</strong>, puedes contactarte por los siguientes canales:</h4>' +
+			'<ol><li style="padding: 0.2% 0;"><strong>Correo:</strong> mesadeayuda@utp.edu.pe</li>' +
+			'<li style="padding: 0.2% 0;"><strong>Whatsapp:</strong>994-693-775</li>' +
+			'<li style="padding: 0.2% 0;"><strong>Teléfono:</strong> 315-9606</li></ol>' +
+			'</div>';
+		// var html_announcement = '<div style="border: solid 1px #c7cdd1; margin-bottom: 20px; background: #f9ffd8; padding: 1%;">' + 
+		// '<h4 style="color: black">Estimados, en estos momentos Zoom esta presentando inconvenientes y posiblemente tenga problemas al ingresar a las reuniones virtuales. Lamentamos lo sucedido, informaremos apenas se solucione este inconveniente.</h4>'+
+		// '<p><strong>Si quieren saber más pueden visitar las siguientes páginas:</strong><p>'+
+		// '<ol><li style="padding: 0.2% 0;"><a href="https://estafallando.es/problemas/zoom" target="_blank">https://estafallando.es/problemas/zoom</a></li>' + 
+		// '<li style="padding: 0.2% 0;"><a href="https://status.zoom.us/" target="_blank">https://status.zoom.us/</a></li>' +
+		// '</div>';
+		if ($('iframe#tool_content').length != -1) {
+			$(html_announcement).insertBefore('iframe#tool_content');
+		}
+	}
+	if (zoom_cgt) {
+		var html_announcement = '<div style="border: solid 1px #c7cdd1; margin-bottom: 20px; background: #f9ffd8; height: 130px; padding: 1%;">' +
+			'<h4 style="color: black">Estimado docente, si tienes algún incoveniente con la <strong>herramienta Zoom</strong>, puedes contactarte por los siguientes canales:</h4>' +
+			'<ol><li style="padding: 0.2% 0;"><strong>Correo:</strong> mesadeayuda@utp.edu.pe</li>' +
+			'<li style="padding: 0.2% 0;"><strong>Whatsapp:</strong>994-693-775</li>' +
+			'<li style="padding: 0.2% 0;"><strong>Teléfono:</strong> 315-9606</li></ol>' +
+			'</div>';
+		// var html_announcement = '<div style="border: solid 1px #c7cdd1; margin-bottom: 20px; background: #f9ffd8; padding: 1%;">' + 
+		// '<h4 style="color: black">Estimados, en estos momentos Zoom esta presentando inconvenientes y posiblemente tenga problemas al ingresar a las reuniones virtuales. Lamentamos lo sucedido, informaremos apenas se solucione este inconveniente.</h4>'+
+		// '<p><strong>Si quieren saber más pueden visitar las siguientes páginas:</strong><p>'+
+		// '<ol><li style="padding: 0.2% 0;"><a href="https://estafallando.es/problemas/zoom" target="_blank">https://estafallando.es/problemas/zoom</a></li>' + 
+		// '<li style="padding: 0.2% 0;"><a href="https://status.zoom.us/" target="_blank">https://status.zoom.us/</a></li>' +
+		// '</div>';
+		if ($('iframe#tool_content').length != -1) {
+			$(html_announcement).insertBefore('iframe#tool_content');
+		}
+	}
+	// if (tarea_config) {
+	// 	var html_announcement = '<p style="background: #f9ffd8;border: solid 1px #c7cdd1;padding: 5px 19px;text-align: justify;margin: 0px 10px 15px 10px;"> Si la tarea tiene como objetivo que el estudiante envíe un archivo, no olvide seleccionar <strong>"En linea"</strong> y la opción <strong>"Carga de archivos."</strong>';
+	// 	if ($('fieldset#submission_type_fields .form-column-right #assignment_submission_type').length != -1) {
+	// 		$(html_announcement).insertBefore('fieldset#submission_type_fields .form-column-right #assignment_submission_type');
+	// 	}
+	// }
+}
+
+if (ENV.current_user_roles != null && ENV.current_user_roles.indexOf('student') != -1) {
+	var str = document.location.href;
+	var match = str.match(/https:\/\/canvas.utp.edu.pe\/courses\/([0-9]*)$/);
+	var course_code = $('[id^="crumb_course_"]').last().text();
+	var modality = course_code.substr(32, course_code.length-33);
+	console.log(modality);
+	if (match) {
+		
+		if(modality == "P"){
+			var html_announcement = 
+				'<div style="border: solid 1px #c7cdd1; margin-bottom: 20px; background: #f9ffd8; padding: 1%;">' +
+				'La experiencia de esta clase ha sido diseñada para desarrollarse de manera <strong>presencial</strong>, incluyendo actividades, ' +
+				'evaluaciones, tareas, trabajos, así como las consultas e interacciones con tu docente. No obstante, también serán transmitidas en vivo vía zoom, además de '+
+				'encontrarlas grabadas en la plataforma como material de consulta durante el ciclo académico en curso.' +
+				'</div>';
+			if ($('#course_home_content').length != -1) {
+				$(html_announcement).insertBefore('#course_home_content');
+			}
+		}
+
+	}
+}
+
+/*************** Encuestas PopUP *****************************/
+
+var str = document.location.href;
+var match = str.match(/https:\/\/canvas.utp.edu.pe\/courses\/([0-9]*)/g);
+
+if (match) {
+	var course = ENV.COURSE_ID
+
+	if (str == 'https://canvas.utp.edu.pe/courses/' + course) {
+		$.get(URL_HEROKU + '/VerifyQuizzPage/' + course)
+			.done(function (htmlpopup) {
+				$('body').append(
+					'<div id="dialog">' + htmlpopup + '</div>'
+				)
+
+				$("#dialog").dialog({
+					modal: true,
+					draggable: false,
+					resizable: false
+				});
+
+				$('.ui-dialog').css({
+					'position': 'fixed',
+					'width': '700px',
+					'height': '590px',
+					'left': '50%',
+					'top': '5%',
+					'transform': 'translateX(-50%)',
+					'overflow': 'scroll'
+				});
+
+				$('.ui-dialog-titlebar .ui-button').css({
+					'display': 'none'
+				});
+			})
+	}
+
+}
+
+// Inicio nuevo Slider Show
+
+// // You can also use "$(window).load(function() {"
+// $(function () {
+// 	console.log("hola");
+// 	// Slideshow 1
+// 	$("#slider1").responsiveSlides({
+// 	  maxwidth: 800,
+// 	  speed: 800
+// 	});
+
+// 	// Slideshow 2
+// 	$("#slider2").responsiveSlides({
+// 	  auto: false,
+// 	  pager: true,
+// 	  speed: 300,
+// 	  maxwidth: 540
+// 	});
+
+// 	// Slideshow 3
+// 	$("#slider3").responsiveSlides({
+// 	  manualControls: '#slider3-pager',
+// 	  maxwidth: 540
+// 	});
+
+// 	// Slideshow 4
+// 	$("#slider4").responsiveSlides({
+// 	  auto: false,
+// 	  pager: false,
+// 	  nav: true,
+// 	  speed: 500,
+// 	  namespace: "callbacks",
+// 	  before: function () {
+// 		$('.events').append("<li>before event fired.</li>");
+// 	  },
+// 	  after: function () {
+// 		$('.events').append("<li>after event fired.</li>");
+// 	  }
+// 	});
+
+//   });
+
+// Fin nuevo SliderShow
+
+
+
+
+//Fin Badges Canva
+
+// // Inicio Porcentaje de cumplimiento modulos
+// // Check to see if we're on the module page by looking for '.module-item-status-icon i'
+// $('.module-item-status-icon i').ready(function(){
+//     // I was having problems with this code executing before the page fully loaded.  document.ready doesn't even seem to work.  Probably needs to be refactored
+//     $(document).ready(()=>{
+//         // to solve my code running before page finished loading problem I had to put in this bandaid.  You may need to adjust the timeout or if you can refactor this that would be great.
+//         setTimeout(()=>{
+//             // grab each context module block that is on the modules page.
+//             var contextModule = $(".context_module");
+//             // loop through each module block that you have
+//             $.each(contextModule, function() {
+//               // Each 'item' inside a module block is identified by the class of .ig-row.  Grab all those
+//               var igRows = $(this).find(".ig-row");
+//               var totalItems = igRows.length;
+//               // Grabs the element that currently says "complete all item". We're going to change that
+//               var requirementsMsg = $(this).find(".requirements_message");
+//               var completedItems = 0;
+//               // loop through each item in the module block.  If it has a green check, then we add one to our completeItems
+//               $.each(igRows, function(index, value) {
+//                   if ($(this).find("i.icon-check").css("display") === "inline-block") {
+//                       completedItems++;
+//                       // this is optional styling flair I added to the items in my module block.  You can delete or edit this line
+//                       // $(this).css("border-left", "3px solid #aebe37");
+//                   } /*else {
+//                       $(this).css("border-left", "3px solid #ebbab9");
+//                   }*/
+//             })
+//             // Change the "complete all items" to instead be a tracker with total items completed.
+// 			if(totalItems==0)
+// 				$(requirementsMsg).find("ul li").text("-");
+// 			else 
+// 				$(requirementsMsg).find("ul li").text(Math.round((completedItems/totalItems)*100)+"%");
+//         })
+//         },1000)
+//     })
+// })
+// // Fin Porcentaje de cumplimiento modulos
+
+// inicio prueba Collapse
+// Use in combination with CSS that loads all modules in a collapsed state.
+// When navigation to the modules page is to a specific module, 
+// automagically click the module so it opens in an expanded state.
+//
+
+if (window.location.href.indexOf('courses/85956') > -1) {
+
+	$('#content #context_modules .content, #content #context_modules .collapse_module_link').css({
+		'display': 'none'
+	})
+
+	$('#content #context_modules .expand_module_link').css({
+		'display': 'inline-block'
+	});
+
+
+	var anchor = window.location.hash;
+	var underscore = anchor.indexOf("_") + 1;
+	var characters = anchor.length;
+	var module = anchor.substring(underscore, characters);
+	var selector = "span[aria-controls='context_module_content_" + module + "']";
+	console.log(selector);
+
+	window.onload = function () { expand_module() };
+
+	function expand_module() {
+		document.querySelector(selector).click();
+		console.log("click attempted");
+	}
+
+	//
+	// Add button and script to expand and collapse all modules
+	//
+
+	// Create the button on Modules pages
+	if (window.location.href.indexOf("modules") > -1) {
+		document.querySelector('.header-bar-right__buttons').insertAdjacentHTML('afterbegin', '<button class="btn" id="expand-collapse-modules" status="collapsed" onclick="expand_collapse_modules()"><span class="screenreader-only">Collapse or expand all modules</span>Expand All Modules</button>');
+	}
+
+	// when the button is clicked, expand or collapse all modules that are not currently expanded or contracted.
+	function expand_collapse_modules() {
+
+		if (document.getElementById("expand-collapse-modules").status == "collapsed") {
+			document.getElementById("expand-collapse-modules").innerText = "Expand All Modules";
+			document.getElementById("expand-collapse-modules").status = "expanded";
+			var items = document.querySelectorAll("span[style='display: inline-block;'][aria-expanded='true']");
+		} else {
+			document.getElementById("expand-collapse-modules").innerText = "Collapse All Modules";
+			document.getElementById("expand-collapse-modules").status = "collapsed";
+			var items = document.querySelectorAll(".expand_module_link:not([style='display: none;'])");
+		}
+
+		for (var i = items.length - 1; i >= 0; i--) {
+			console.log(i);
+			items[i].click();
+		}
+
+	}
+};
+
+
+// Inicio SliderShow Comunidad docente
+
+if (window.location.href.indexOf('courses/109962') > -1) {
+	var slideIndex = 0;
+	setTimeout(showSlides, 1000);
+
+	function showSlides() {
+		var i;
+		var slides = document.getElementsByClassName("mySlides");
+		var dots = document.getElementsByClassName("dot");
+		for (i = 0; i < slides.length; i++) {
+			slides[i].style.display = "none";
+		}
+		slideIndex++;
+		if (slideIndex > slides.length) { slideIndex = 1 }
+		for (i = 0; i < dots.length; i++) {
+			dots[i].className = dots[i].className.replace(" active", "");
+		}
+		slides[slideIndex - 1].style.display = "block";
+		dots[slideIndex - 1].className += " active";
+		setTimeout(showSlides, 7800); // Change image every 2 seconds
+	}
+}
+// Fin SliderShow
+
+
+// // Inicio Chat UTP
+// var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+// (function(){
+// var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+// s1.async=true;
+// s1.src='https://embed.tawk.to/599df04fb6e907673de09309/default';
+// s1.charset='UTF-8';
+// s1.setAttribute('crossorigin','*');
+// s0.parentNode.insertBefore(s1,s0);
+// })();
+// // Fin Chat UTP
+
+// // Inicio Chat Crisp
+// if(window.location.href!='https://canvas.utp.edu.pe/login/canvas') {
+// 	window.$crisp=[];window.CRISP_WEBSITE_ID="6004c8e0-014f-4a38-a7ba-d1b58e529a16";(function(){ d=document;s=d.createElement("script"); s.src="https://client.crisp.chat/l.js"; s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
+// 	// window.$crisp.push(["do", "session: reset", [true]]);
+// 	$crisp.push(["do", "session:reset"])
+// 	console.log('crisp-si')
+// }
+// // Fin chat Crisp
+
+/************************ Inicio Ocultar Preguntas Roles  *************************/
+// if (ENV.current_user_types.includes('SupportTeacher') || ENV.current_user_types.includes('SupportStudent') || ENV.current_user_types.includes('AdminCoordinator')) {
+if (ENV.current_user_types.includes('SupportStudent')) {
+	$("li.section a.settings").remove();
+	accounts_re = new RegExp('https:\/\/(.*?)\/accounts\/' + ENV.ACCOUNT_ID + '$', 'g');
+	settings_re = new RegExp('https:\/\/(.*?)\/courses\/([0-9]*)\/settings$', 'g');
+	if (window.location.href.split(/[?#]/)[0].match(accounts_re)) {
+		$("form button:contains('Curso')").remove();
+	} else if (str.match(settings_re)) {
+		window.location.href = ENV.COURSE_ROOT_URL;
+	}
+}
+/************************ Fin Ocultar Preguntas Roles  *************************/
